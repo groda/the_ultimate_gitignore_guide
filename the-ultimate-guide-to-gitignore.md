@@ -1,10 +1,43 @@
 <h1>THE ULTIMATE GUIDE TO <code>.gitignore</code></h1>
- _in form of a Q&A_
+
+_in form of a Q&A_
 
 
-[TOC]
+-   [TL;DR](#tldr)
+-   [What is `.gitignore`?](#what-is-gitignore)
+    -   [Note that `.gitignore` starts with a
+        `.`](#note-that-gitignore-starts-with-a-)
+-   [Which files would I want to
+    ignore?](#which-files-would-i-want-to-ignore)
+    -   [A mini-introduction to
+        globbing](#a-mini-introduction-to-globbing)
+-   [Where can I find `.gitignore`
+    templates?](#where-can-i-find-gitignore-templates)
+    -   [Online `.gitignore`
+        generator](#online-gitignore-generator)
+-   [How to format a `.gitignore`
+    file?](#how-to-format-a-gitignore-file)
+    -   [Some examples](#some-examples)
+-   [How to check which files will be
+    ignored?](#how-to-check-which-files-will-be-ignored)
+    -   [Example](#example)
+    -   [A useful command to check all ignored
+        files](#a-useful-command-to-check-all-ignored-files)
+-   [What happens to files that were being tracked before adding
+    `.gitignore`?](#what-happens-to-files-that-were-being-tracked-before-adding-gitignore)
+-   [How to stop tracking previously tracked
+    files?](#how-to-stop-tracking-previously-tracked-files)
+    -   [Example](#example-1)
+-   [Why would I want to ignore
+    `.gitignore`?](#why-would-i-want-to-ignore-gitignore)
+-   [Where should I put
+    `.gitignore`?](#where-should-i-put-gitignore)
+    -   [Order of precedence of `.gitignore`
+        patterns](#order-of-precedence-of-gitignore-patterns)
+-   [Sources / further
+    reading](#sources--further-reading)
 
-## tl;dr
+## TL;DR
 
 Add a `.gitignore` file to your project's working directory to tell Git which files have to be ignored. Each line in the file should contain a _glob_ pattern matching files that you do not want to track in your Git repository.
 
