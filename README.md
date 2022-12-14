@@ -30,10 +30,10 @@ _in form of a Q&A_
     -   [Example](#example-1)
 -   [Why would I want to ignore
     `.gitignore`?](#why-would-i-want-to-ignore-gitignore)
--   [Where should I put
-    `.gitignore`?](#where-should-i-put-gitignore)
+-   [Where should I put `.gitignore`?](#where-should-i-put-gitignore)
     -   [Order of precedence of `.gitignore`
         patterns](#order-of-precedence-of-gitignore-patterns)
+-   [And what is `.gitkeep`?](#and-what-is-gitkeep)
 -   [Sources / further
     reading](#sources--further-reading)
 
@@ -427,6 +427,13 @@ From the [`.gitignore` documentation](https://git-scm.com/docs/gitignore):
 > 
 > - Patterns read from the file specified by the configuration variable `core.excludesFile`.
 
+## And what is `.gitkeep`?
+
+`.gitkeep` is a dummy file used in empty directories to trick Git into tracking them. Git would otherwise not add empty directories.
+
+While `.gitkeep` is a common choice, any other file name can be used to keep empty directories tracked. Some prefer to use the file `.keep` or even an empty `.gitignore` (or containing the line `!.gitignore` to prevent it from being ignored in case already untracked).
+
+See also: [What are the differences between .gitignore and .gitkeep?](https://stackoverflow.com/questions/7229885/what-are-the-differences-between-gitignore-and-gitkeep).
 
 
 
