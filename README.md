@@ -2,40 +2,34 @@
 
 _in form of a Q&A_
 
+<!-- TOC start (generated with https://derlin.github.io/bitdowntoc/) -->
 
--   [TL;DR](#tldr)
--   [What is `.gitignore`?](#what-is-gitignore)
-    -   [Note that `.gitignore` starts with a
-        `.`](#note-that-gitignore-starts-with-a-)
--   [Which files would I want to
-    ignore?](#which-files-would-i-want-to-ignore)
-    -   [A mini-introduction to
-        globbing](#a-mini-introduction-to-globbing)
--   [Where can I find `.gitignore`
-    templates?](#where-can-i-find-gitignore-templates)
-    -   [Online `.gitignore`
-        generator](#online-gitignore-generator)
--   [How to format a `.gitignore`
-    file?](#how-to-format-a-gitignore-file)
-    -   [Some examples](#some-examples)
--   [How to check which files will be
-    ignored?](#how-to-check-which-files-will-be-ignored)
-    -   [Example](#example)
-    -   [A useful command to check all ignored
-        files](#a-useful-command-to-check-all-ignored-files)
--   [What happens to files that were being tracked before adding
-    `.gitignore`?](#what-happens-to-files-that-were-being-tracked-before-adding-gitignore)
--   [How to stop tracking previously tracked
-    files?](#how-to-stop-tracking-previously-tracked-files)
-    -   [Example](#example-1)
--   [Why would I want to ignore
-    `.gitignore`?](#why-would-i-want-to-ignore-gitignore)
--   [Where should I put `.gitignore`?](#where-should-i-put-gitignore)
-    -   [Order of precedence of `.gitignore`
-        patterns](#order-of-precedence-of-gitignore-patterns)
--   [And what is `.gitkeep`?](#and-what-is-gitkeep)
--   [Sources / further
-    reading](#sources--further-reading)
+- [TL;DR](#tldr)
+- [What is `.gitignore`?](#what-is-gitignore)
+   * [Note that `.gitignore` starts with a `.`](#note-that-gitignore-starts-with-a-)
+- [Which files would I want to ignore?](#which-files-would-i-want-to-ignore)
+   * [A mini-introduction to globbing](#a-mini-introduction-to-globbing)
+      + [Is “glob” an English word?](#is-glob-an-english-word)
+      + [And by the way, what does “git” stand for? Is it an acronym?](#and-by-the-way-what-does-git-stand-for-is-it-an-acronym)
+- [Should I use `.gitignore` to safeguard sensitive data?](#should-i-use-gitignore-to-safeguard-sensitive-data)
+- [Why do developers usually include executables in the `.gitignore` file?](#why-do-developers-usually-include-executables-in-the-gitignore-file)
+- [Where can I find `.gitignore` templates?](#where-can-i-find-gitignore-templates)
+   * [Online `.gitignore` generator](#online-gitignore-generator)
+- [How to format a `.gitignore` file?](#how-to-format-a-gitignore-file)
+   * [Some examples ](#some-examples)
+- [How to check which files will be ignored?](#how-to-check-which-files-will-be-ignored)
+   * [Example](#example)
+   * [A useful command to check all ignored files](#a-useful-command-to-check-all-ignored-files)
+- [What happens to files that were being tracked before adding `.gitignore`?](#what-happens-to-files-that-were-being-tracked-before-adding-gitignore)
+- [How to stop tracking previously tracked files?](#how-to-stop-tracking-previously-tracked-files)
+   * [Example](#example-1)
+- [Why would I want to ignore `.gitignore`?](#why-would-i-want-to-ignore-gitignore)
+- [Where should I put `.gitignore`?](#where-should-i-put-gitignore)
+   * [Order of precedence of `.gitignore` patterns ](#order-of-precedence-of-gitignore-patterns)
+- [And what is `.gitkeep`?](#and-what-is-gitkeep)
+- [Sources / further reading](#sources-further-reading)
+
+<!-- TOC end -->
 
 ## TL;DR
 
@@ -52,6 +46,8 @@ Comment lines in `.gitignore` start with a `#`, empty lines are ignored.
 If `.gitignore` contains files that had previously been tracked, remove them with
 
     git rm --cached
+    
+Be aware that relying solely on `.gitignore` is not the recommended approach for preventing the accidental exposure of confidential data in your Git repository. 
 
 Use [Github templates](https://github.com/github/gitignore), [Gitlab](https://gitlab.com/projects/new)'s pre-populated projects, or an [online generator](https://www.toptal.com/developers/gitignore) for inspiration on `.gitignore` file entries. 
 
@@ -79,8 +75,6 @@ See also:
 ## Which files would I want to ignore?
 
 Typically, output files generated from code runs, such as compiled code, logfiles, in general anything that's temporary and can be re-generated.
-
-You might also want to add files containing sensitive information to `.gitignore`, even though for such files `.gitignore` is not the best solution and you should better keep those files in a different location than your Git workspace.
 
 For example, the line:
 
@@ -125,6 +119,31 @@ From the [README](https://github.com/git/git/blob/e83c5163316f89bfbde7d9ab23ca2e
 > “git” can mean anything, depending on your mood
 
 But its author Linus Torvalds also claims to have named Git after “git”, the British slang word for “unpleasant person” (as in: “that mean old git”).
+
+## Should I use `.gitignore` to safeguard sensitive data?
+
+Adding files containing sensitive information to `.gitignore` is not a good idea and you should better keep those files in a different location than your Git workspace.
+
+`.gitignore` does not provide foolproof protection against unintentional disclosure of confidential data (think of the case that a collaborator deletes the `.gitignore` file). To mitigate the risk of disclosing sensitive information it crucial to implement additional security measures, such as proper access controls, encryption, and regular audits.
+
+Here are some recommended practices for handling sensitive data in a Git repository:
+- **Avoid Hardcoding Secrets:** refrain from hardcoding sensitive information directly into the source code. Use configuration files or environment variables instead. Save a template to your Git repository and the actual secrets locally or in a vault service.
+- **Security Audits:** use tools like [`git-secrets`](https://github.com/awslabs/git-secrets) or [gitleaks](https://github.com/gitleaks/gitleaks) to scan your code for passwords and other sensitive information before committing it to a git repository.
+- **Encrypt Sensitive Files:** use [`git-crypt`](https://github.com/AGWA/git-crypt) to protect sensitive files by encrypting them when committed.
+
+
+
+## Why do developers usually include executables in the `.gitignore` file?
+
+Adding executables to the `.gitignore` file is a common practice in software development for a few reasons:
+
+- **Build Process Artifacts:** Including executables in version control is redundant, as they can be recreated whenever needed by anyone with the source code and the necessary build tools. Uploading executables to a Git repository defies the essential purpose of version control, which is designed for tracking changes in source code.
+- **Platform Independence:** Executables are platform-specific. Including them in version control can cause issues when team members are using different operating systems. By ignoring executables, you avoid potential conflicts.
+- **Repository Size and Speed:** executables tend to be large files, leading to slower repository operations.
+- **Security:** The presence of executables in a public Git repository can pose security risks and may potentially be exploited in various ways:
+  - **Malicious Code Injection:** Executables might be modified to include malicious functionalitys. Users who download and run these modified executables may inadvertently introduce security threats into their systems.
+  - **Information Disclosure:** Executables might contain hardcoded credentials or other confidential information. 
+
 
 ## Where can I find `.gitignore` templates?
 
@@ -452,4 +471,3 @@ See also:
 - [Learning All about GitIgnore : Ignoring Files and Folders](https://medium.com/@it.hhkn/learning-all-about-gitignore-ignoring-files-and-folders-d731998a7790)
 - [Git command to show which specific files are ignored by .gitignore](https://stackoverflow.com/questions/466764/git-command-to-show-which-specific-files-are-ignored-by-gitignore)
 - [git-check-ignore](https://git-scm.com/docs/git-check-ignore)
-
