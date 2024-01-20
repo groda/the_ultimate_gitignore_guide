@@ -1,4 +1,4 @@
-![the_ultimate_gitignore_guide](https://socialify.git.ci/groda/the_ultimate_gitignore_guide/image?description=1&font=Rokkitt&language=1&name=1&owner=1&pattern=Floating%20Cogs&stargazers=1&theme=Dark)
+![the_ultimate_gitignore_guide](the_ultimate_gitignore_guide.svg)
 
 <h1>THE ULTIMATE GUIDE TO <code>.gitignore</code></h1>
 
