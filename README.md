@@ -1,3 +1,5 @@
+![the_ultimate_gitignore_guide](https://socialify.git.ci/groda/the_ultimate_gitignore_guide/image?description=1&font=Rokkitt&language=1&name=1&owner=1&pattern=Floating%20Cogs&stargazers=1&theme=Dark)
+
 <h1>THE ULTIMATE GUIDE TO <code>.gitignore</code></h1>
 
 _in form of a Q&A_
@@ -27,11 +29,11 @@ _in form of a Q&A_
 - [Where should I put `.gitignore`?](#where-should-i-put-gitignore)
    * [Order of precedence of `.gitignore` patterns ](#order-of-precedence-of-gitignore-patterns)
 - [And what is `.gitkeep`?](#and-what-is-gitkeep)
-- [Sources / further reading](#sources-further-reading)
+- [Sources / further reading](#sources-and-further-reading)
 
 <!-- TOC end -->
 
-## TL;DR
+# TL;DR
 
 Add a `.gitignore` file to your project's working directory to tell Git which files have to be ignored. Each line in the file should contain a _glob_ pattern matching files that you do not want to track in your Git repository.
 
@@ -51,14 +53,14 @@ Be aware that relying solely on `.gitignore` is not the recommended approach for
 
 Use [Github templates](https://github.com/github/gitignore), [Gitlab](https://gitlab.com/projects/new)'s pre-populated projects, or an [online generator](https://www.toptal.com/developers/gitignore) for inspiration on `.gitignore` file entries. 
 
-## What is `.gitignore`?
+# What is `.gitignore`?
 
 `.gitignore` is a text file containing a list of all files that should be ignored by git, that is no change in those files should be recorded in the Git repository.
 
 From the [Git documentation](https://git-scm.com/docs/gitignore):
 > gitignore - Specifies intentionally untracked files to ignore
 
-### Note that `.gitignore` starts with a `.`
+## Note that `.gitignore` starts with a `.`
 
 Note that the `.gitignore` file starts with a dot (`.`). This means you might not be able to see it by default depending on your operating system. For instance, on Linux/Unix/Mac, if you type `ls` you won't see files starting with `.`. In order to see those files too you need to use the option `-a` like this:
 
@@ -72,7 +74,7 @@ See also:
 - [Awesome dotfiles](https://github.com/webpro/awesome-dotfiles), a curated list of dotfiles resources, and 
 - [https://dotfiles.github.io/](https://dotfiles.github.io/), a guide to dotfiles on GitHub.
 
-## Which files would I want to ignore?
+# Which files would I want to ignore?
 
 Typically, output files generated from code runs, such as compiled code, logfiles, in general anything that's temporary and can be re-generated.
 
@@ -82,7 +84,7 @@ For example, the line:
     
 in a `.gitignore` file will tell Git to ignore all files with the extension `.log` (the asterisk `*` is known as a _globbing pattern_.
 
-### A mini-introduction to globbing
+## A mini-introduction to globbing
 
 Globbing is the operation that expands a wildcard pattern into the list of pathnames matching the pattern.  Matching is defined by:
 
@@ -106,12 +108,12 @@ Source: [glob](https://man7.org/linux/man-pages/man7/glob.7.html)
 
 Of course, if you have a logfile in your repository to showcase something about logfiles, then you won't want to ignore that file because of it being an integral part of your code release.
 
-#### Is “glob” an English word?
+### Is “glob” an English word?
 
 The name “glob” is the abbreviation of “global” and it originates from the 1971 Bell Labs' Unix version. Here is the description of `/etc/glob` from the Unix Programmer's Manual (K. Thompson and D. M. Ritchie, November 3, 1971 [available online](https://www.bell-labs.com/usr/dmr/www/1stEdman.html)):
 > `glob` is used to expand arguments to the shell containing `*` or `?`. It is passed the argument list containing the metacharacters; glob expands the list and calls the command itself
 
-#### And by the way, what does “git” stand for? Is it an acronym?
+### And by the way, what does “git” stand for? Is it an acronym?
 
 
 From the [README](https://github.com/git/git/blob/e83c5163316f89bfbde7d9ab23ca2e25604af290/README) file in Git's Git repository:
@@ -120,7 +122,7 @@ From the [README](https://github.com/git/git/blob/e83c5163316f89bfbde7d9ab23ca2e
 
 But its author Linus Torvalds also claims to have named Git after “git”, the British slang word for “unpleasant person” (as in: “that mean old git”).
 
-## Should I use `.gitignore` to safeguard sensitive data?
+# Should I use `.gitignore` to safeguard sensitive data?
 
 Adding files containing sensitive information to `.gitignore` is not a good idea and you should better keep those files in a different location than your Git workspace.
 
@@ -133,7 +135,7 @@ Here are some recommended practices for handling sensitive data in a Git reposit
 
 
 
-## Why do developers usually include executables in the `.gitignore` file?
+# Why do developers usually include executables in the `.gitignore` file?
 
 Adding executables to the `.gitignore` file is a common practice in software development for a few reasons:
 
@@ -145,7 +147,7 @@ Adding executables to the `.gitignore` file is a common practice in software dev
   - **Information Disclosure:** Executables might contain hardcoded credentials or other confidential information. 
 
 
-## Where can I find `.gitignore` templates?
+# Where can I find `.gitignore` templates?
 
 The [gitignore](https://github.com/github/gitignore) repository on Github provides a collection of `.gitignore` templates for many programming languages.
 
@@ -178,11 +180,11 @@ If you've ever worked with Latex you will be familiar with the `.log`, `.aux`, e
 
 **Note:** Github will propose to choose from its list of `.gitignore` templates when creating a new project. Gitlab does not have this option for generic projects but it includes a `.gitignore` file in pre-populated template projects.
 
-### Online `.gitignore` generator
+## Online `.gitignore` generator
 
 There's also an online generator of `.gitignore` files: [gitignore.io](https://www.toptal.com/developers/gitignore). Enter the programming languages used in your repository and the generator will create a `.ignore` file for you.
 
-## How to format a `.gitignore` file?
+# How to format a `.gitignore` file?
 
 Here are the formatting rules for `.gitignore`:
 
@@ -203,7 +205,7 @@ Here are the formatting rules for `.gitignore`:
 	- the range notation, e.g. `[a-zA-Z]`, can be used to match one of the characters in a range
 	- two asterisks (`**`) match any number of subdirectories
 
-### Some examples 
+## Some examples 
 
 **Note:** `% ` represents my shell prompt.
 
@@ -248,7 +250,7 @@ then only  `./myFile1` will be skipped.
 
 
 
-## How to check which files will be ignored?
+# How to check which files will be ignored?
 
 Git provides a handy utility to debug `.gitignore`: `git-check-ignore`.
 
@@ -257,7 +259,7 @@ To check whether a path or file is going to be ignored by `git` use:
     git check-ignore [<options>] <pathname>…​
     git check-ignore [<options>] --stdin
 
-### Example
+## Example
 
 My `.gitignore` file contains one single line, the kind of pattern I want to ignore are all files like `myFile1`, `myFile2`, ... but only if they are in the root folder.
 
@@ -290,7 +292,7 @@ git check-ignore -v -n myDir/myFile1
 
 In this case, the file `myDir/myFile1` is shown in the output of `git check-ignore` but the file won't be ignored by `git` as it does not match any pattern in `.gitignore`.
 
-### A useful command to check all ignored files
+## A useful command to check all ignored files
 
 Check all files in the Git working directory:
 
@@ -301,20 +303,20 @@ This command will scan all files and folders in your current directory and check
 Credit for the `find` command: [this answer on Stackoverflow](https://stackoverflow.com/a/467053) (_Git command to show which specific files are ignored by .gitignore_).
 
  
-## What happens to files that were being tracked before adding `.gitignore`?
+# What happens to files that were being tracked before adding `.gitignore`?
 
 Since `.gitignore` does not have a retroactive effect, you need to untrack the files that were tracked before the introduction of `.gitignore`.
 
 
 
 
-## How to stop tracking previously tracked files?
+# How to stop tracking previously tracked files?
 
 To tell Git to stop tracking a file (aka ignoring it) you can use `git rm --cached`. 
 
 See also: [How do I make Git forget about a file that was tracked, but is now in .gitignore?](https://stackoverflow.com/questions/1274057/how-do-i-make-git-forget-about-a-file-that-was-tracked-but-is-now-in-gitignore).
 
-### Example
+## Example
 
 **Note:** `gitignore_tests % ` represents my shell prompt.
 
@@ -412,7 +414,7 @@ and it is not tracked by `git` anymore
 
 
 
-## Why would I want to ignore `.gitignore`?
+# Why would I want to ignore `.gitignore`?
 
 Oftentimes one finds the line 
 
@@ -423,7 +425,7 @@ in `.gitignore` files.
 This is not good practice but be aware that it is allowed.
 
 
-## Where should I put `.gitignore`?
+# Where should I put `.gitignore`?
 
 `.gitignore` is usually located in Git project's working directory (this is the directory containing the `.git` folder, the actual Git repository). 
 
@@ -432,7 +434,7 @@ However a `.gitignore` file can also be located in any subfolder of the top-leve
 
 `.gitignore` files that are not in the root directory of your Git project have an “ignore” effect on the folders in which they're located and on their subfolders.
 
-### Order of precedence of `.gitignore` patterns 
+## Order of precedence of `.gitignore` patterns 
 
 From the [`.gitignore` documentation](https://git-scm.com/docs/gitignore):
 
@@ -446,7 +448,7 @@ From the [`.gitignore` documentation](https://git-scm.com/docs/gitignore):
 > 
 > - Patterns read from the file specified by the configuration variable `core.excludesFile`.
 
-## And what is `.gitkeep`?
+# And what is `.gitkeep`?
 
 `.gitkeep` is a dummy file used in empty directories to trick Git into tracking them. Git would otherwise not add empty directories.
 
@@ -456,8 +458,7 @@ See also: [What are the differences between .gitignore and .gitkeep?](https://st
 
 
 
-## Sources / further reading
-
+# Sources and further reading
 
 See also:
 
