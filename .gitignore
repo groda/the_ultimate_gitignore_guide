@@ -1,0 +1,11 @@
+# Ignore all files except Markdown files and images
+/*
+!*.md
+!*.png
+!*.jpg
+!*.jpeg
+!*.gif
+!*.svg
+
+# Allow .gitignore
+!.gitignore
