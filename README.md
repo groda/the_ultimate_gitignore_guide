@@ -13,7 +13,8 @@ _in form of a Q&A_
    * [A mini-introduction to globbing](#a-mini-introduction-to-globbing)
       + [Is “glob” an English word?](#is-glob-an-english-word)
       + [And by the way, what does “git” stand for? Is it an acronym?](#and-by-the-way-what-does-git-stand-for-is-it-an-acronym)
-- [Should I use `.gitignore` to safeguard sensitive data?](#should-i-use-gitignore-to-safeguard-sensitive-data)
+- [What's the benefit of excluding certain files?](#whats-the-benefit-of-excluding-certain-files)
+- [Should I rely on `.gitignore` for safeguarding sensitive data?](#should-i-rely-on-gitignore-for-safeguarding-sensitive-data)
 - [Why do developers usually include executables in the `.gitignore` file?](#why-do-developers-usually-include-executables-in-the-gitignore-file)
 - [Where can I find `.gitignore` templates?](#where-can-i-find-gitignore-templates)
    * [Online `.gitignore` generator](#online-gitignore-generator)
@@ -29,6 +30,8 @@ _in form of a Q&A_
 - [Where should I put `.gitignore`?](#where-should-i-put-gitignore)
    * [Order of precedence of `.gitignore` patterns ](#order-of-precedence-of-gitignore-patterns)
 - [And what is `.gitkeep`?](#and-what-is-gitkeep)
+- [Did Git first introduce ignore functionality and glob pattern usage?](#did-git-first-introduce-ignore-functionality-and-glob-pattern-usage)
+- [What are some other common ignore files in software development?](#what-are-some-other-common-ignore-files-in-software-development)
 - [Sources / further reading](#sources-and-further-reading)
 
 <!-- TOC end -->
@@ -122,7 +125,23 @@ From the [README](https://github.com/git/git/blob/e83c5163316f89bfbde7d9ab23ca2e
 
 But its author Linus Torvalds also claims to have named Git after “git”, the British slang word for “unpleasant person” (as in: “that mean old git”).
 
-# Should I use `.gitignore` to safeguard sensitive data?
+# What's the benefit of excluding certain files?
+
+Excluding certain files from version control using `.gitignore` serves several important purposes:
+
+1. Limiting Storage Footprint: Ignoring unnecessary files helps reduce the size of your repository. This is particularly important for large files, temporary files, or files generated during the build process, which can quickly inflate the size of your repository and consume storage space.
+
+2. Maintaining a Clean Repository: By excluding irrelevant files, you keep your repository clean and focused on the core files essential to your project. This makes it easier to navigate, understand, and collaborate on the codebase without clutter from unrelated files.
+
+3. Improving Performance: Ignoring unnecessary files can improve the performance of Git operations such as cloning, fetching, and pushing. With fewer files to process, these operations can be faster and more efficient, especially for distributed teams or large projects.
+
+4. Facilitating Collaboration: Ignoring editor or IDE-specific files, build artifacts, or dependencies ensures consistency across different development environments. It prevents conflicts and compatibility issues that may arise when collaborators use different tools or configurations.
+
+5. Enhancing Security and Privacy: .gitignore helps prevent sensitive information, such as API keys, passwords, or personal configuration files, from being accidentally committed to the repository. By excluding such files, you reduce the risk of exposing sensitive data to unauthorized users. However, please refer to the following section for caveats.
+
+In summary, excluding files using `.gitignore` promotes efficient repository management, improves performance, enhances security, and fosters collaboration by maintaining a focused and clutter-free codebase.
+
+# Should I rely on `.gitignore` for safeguarding sensitive data?
 
 Adding files containing sensitive information to `.gitignore` is not a good idea and you should better keep those files in a different location than your Git workspace.
 
@@ -412,8 +431,6 @@ and it is not tracked by `git` anymore
 
 
 
-
-
 # Why would I want to ignore `.gitignore`?
 
 Oftentimes one finds the line 
@@ -456,12 +473,33 @@ While `.gitkeep` is a common choice, any other file name can be used to keep emp
 
 See also: [What are the differences between .gitignore and .gitkeep?](https://stackoverflow.com/questions/7229885/what-are-the-differences-between-gitignore-and-gitkeep).
 
+# Did Git first introduce ignore functionality and glob pattern usage?
 
+No, Git's `.gitignore` files were not the first to introduce ignore functionality and glob patterns. These features already existed in other version control systems before Git. For example:
 
+- Mercurial, another popular distributed version control system, introduced the `.hgignore` file for specifying patterns to ignore files and directories. Mercurial's ignore file serves a similar purpose to Git's `.gitignore` and also uses glob patterns.
+- Subversion (SVN), a centralized version control system, has the `svn:ignore` property that allows users to specify patterns to ignore files and directories within the repository.
+
+Git's implementation of the `.gitignore` file has become widely known and adopted due to Git's popularity and widespread use in software development.
+
+# What are some other common ignore files in software development?
+
+Ignore files play a crucial role in managing a project's source code or other assets by keeping repositories clean and focused on relevant files.
+
+Here's a list of of common ignore files used in different contexts other than Git:
+- `.hgignore`: Used in Mercurial repositories for specifying patterns to ignore files and directories.
+- `.npmignore`: Used in Node.js projects to specify files and directories that should be ignored when publishing packages to the npm registry.
+- `.dockerignore`: Used in Docker projects to specify files and directories that should be excluded from the Docker build context when creating Docker images.
+- `.eslintignore`: Used in projects using ESLint to specify files and directories that should be ignored during linting.
+- `.prettierignore`: Used in projects using Prettier to specify files and directories that should not be formatted by Prettier.
+- `.babelignore`: Used in projects using Babel to specify files and directories that should not be transpiled by Babel ("transpiling" means converting modern JavaScript code into older versions that are compatible with a wider range of browsers or environments).
+- `.rsyncignore`: Used with the rsync utility to specify files and directories that should be excluded from synchronization.
+ 
 # Sources and further reading
 
 See also:
 
+- [Ignoring files](https://docs.github.com/en/get-started/getting-started-with-git/ignoring-files) A quick start guide on how to configure Git to ignore files you don't want to check in to GitHub.
 - [gitignore](https://git-scm.com/docs/gitignore) by the Git community
 - Pro Git book, by Scott Chacon and Ben Straub available [online](https://git-scm.com/book/en/v2)
 - [Ignore files that have already been committed to a Git repository](https://stackoverflow.com/questions/1139762/ignore-files-that-have-already-been-committed-to-a-git-repository/1139797#1139797)
