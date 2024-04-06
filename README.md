@@ -32,6 +32,7 @@ _in form of a Q&A_
 - [And what is `.gitkeep`?](#and-what-is-gitkeep)
 - [Did Git first introduce ignore functionality and glob pattern usage?](#did-git-first-introduce-ignore-functionality-and-glob-pattern-usage)
 - [What are some other common ignore files in software development?](#what-are-some-other-common-ignore-files-in-software-development)
+- [Where to locate examples of ignore files?](#where-to-locate-examples-of-ignore-files)
 - [Sources / further reading](#sources-and-further-reading)
 
 <!-- TOC end -->
@@ -54,7 +55,7 @@ If `.gitignore` contains files that had previously been tracked, remove them wit
     
 Be aware that relying solely on `.gitignore` is not the recommended approach for preventing the accidental exposure of confidential data in your Git repository. 
 
-Use [Github templates](https://github.com/github/gitignore), [Gitlab](https://gitlab.com/projects/new)'s pre-populated projects, or an [online generator](https://www.toptal.com/developers/gitignore) for inspiration on `.gitignore` file entries. 
+Use [GitHub templates](https://github.com/github/gitignore), [GitLab](https://gitlab.com/projects/new)'s pre-populated projects, or an [online generator](https://www.toptal.com/developers/gitignore) for inspiration on `.gitignore` file entries. 
 
 # What is `.gitignore`?
 
@@ -168,7 +169,7 @@ Adding executables to the `.gitignore` file is a common practice in software dev
 
 # Where can I find `.gitignore` templates?
 
-The [gitignore](https://github.com/github/gitignore) repository on Github provides a collection of `.gitignore` templates for many programming languages.
+The [gitignore](https://github.com/github/gitignore) repository on GitHub provides a collection of `.gitignore` templates for many programming languages.
 
 If you've ever worked with Latex you will be familiar with the `.log`, `.aux`, etc. files that can reasonably be excluded from your Git repository. Here's how an excerpt from the `Tex` template looks like:
 
@@ -197,7 +198,7 @@ If you've ever worked with Latex you will be familiar with the `.log`, `.aux`, e
 
 (the `.pdf` file at the end with no name, just an extension, is the typical file you would want to delete anyway)
 
-**Note:** Github will propose to choose from its list of `.gitignore` templates when creating a new project. Gitlab does not have this option for generic projects but it includes a `.gitignore` file in pre-populated template projects.
+**Note:** GitHub will propose to choose from its list of `.gitignore` templates when creating a new project. Gitlab does not have this option for generic projects but it includes a `.gitignore` file in pre-populated template projects.
 
 ## Online `.gitignore` generator
 
@@ -495,6 +496,25 @@ Here's a list of of common ignore files used in different contexts other than Gi
 - `.babelignore`: Used in projects using Babel to specify files and directories that should not be transpiled by Babel ("transpiling" means converting modern JavaScript code into older versions that are compatible with a wider range of browsers or environments).
 - `.rsyncignore`: Used with the rsync utility to specify files and directories that should be excluded from synchronization.
  
+ 
+# Where to locate examples of ignore files?
+
+You can use [Git's advanced search]() to discover a variety of ignore files for inspiration. 
+
+You can search by path
+
+![GitHub advanced search: search by path](search_by_path01.png)
+
+![GitHub advanced search: search by path](search_by_path02.png)
+
+or there's even a programming language called “Ignore List”
+
+![GitHub advanced search: search by language](ignore_list01.png)
+
+![GitHub advanced search: search by language](ignore_list02.png)
+
+As an aside, I'd like to mention that I find GitHub's search feature ([https://github.com/search](https://github.com/search)) very helpful for discovering interesting repositories or code snippets.
+
 # Sources and further reading
 
 See also:
@@ -504,7 +524,7 @@ See also:
 - Pro Git book, by Scott Chacon and Ben Straub available [online](https://git-scm.com/book/en/v2)
 - [Ignore files that have already been committed to a Git repository](https://stackoverflow.com/questions/1139762/ignore-files-that-have-already-been-committed-to-a-git-repository/1139797#1139797)
 - [How do I make Git forget about a file that was tracked, but is now in .gitignore?](https://stackoverflow.com/questions/1274057/how-do-i-make-git-forget-about-a-file-that-was-tracked-but-is-now-in-gitignore)
-- [.gitignore](https://www.atlassian.com/git/tutorials/saving-changes/gitignore)
+- [.gitignore](https://www.atlassian.com/git/tutorials/saving-changes/gitignore) A clearly presented, well-structured, and easily comprehensible tutorial on `gitignore` by Atlassian
 - [Multiple .gitignore in subfolders](https://stackoverflow.com/questions/53208235/multiple-gitignore-in-subfolders)
 - [Don't ignore .gitignore](https://opensource.com/article/20/8/dont-ignore-gitignore)
 - [Learning All about GitIgnore : Ignoring Files and Folders](https://medium.com/@it.hhkn/learning-all-about-gitignore-ignoring-files-and-folders-d731998a7790)
