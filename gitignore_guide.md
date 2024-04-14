@@ -21,6 +21,7 @@ _in form of a Q&A_
 - [How to format a `.gitignore` file?](#how-to-format-a-gitignore-file)
    * [Some examples ](#some-examples)
 - [How to check which files will be ignored?](#how-to-check-which-files-will-be-ignored)
+   * [An epic question on StackOverflow](#an-epic-question-on-stackoverflow)
    * [Example](#example)
    * [A useful command to check all ignored files](#a-useful-command-to-check-all-ignored-files)
 - [What happens to files that were being tracked before adding `.gitignore`?](#what-happens-to-files-that-were-being-tracked-before-adding-gitignore)
@@ -53,7 +54,7 @@ If `.gitignore` contains files that had previously been tracked, remove them wit
 
     git rm --cached
     
-Be aware that relying solely on `.gitignore` is not the recommended approach for preventing the accidental exposure of confidential data in your Git repository. 
+Be aware that relying solely on `.gitignore` is not the recommended approach for preventing the accidental exposure of confidential data in your Git repository! 
 
 Use [GitHub templates](https://github.com/github/gitignore), [GitLab](https://gitlab.com/projects/new)'s pre-populated projects, or an [online generator](https://www.toptal.com/developers/gitignore) for inspiration on `.gitignore` file entries. 
 
@@ -116,6 +117,10 @@ Of course, if you have a logfile in your repository to showcase something about 
 
 The name “glob” is the abbreviation of “global” and it originates from the 1971 Bell Labs' Unix version. Here is the description of `/etc/glob` from the Unix Programmer's Manual (K. Thompson and D. M. Ritchie, November 3, 1971 [available online](https://www.bell-labs.com/usr/dmr/www/1stEdman.html)):
 > `glob` is used to expand arguments to the shell containing `*` or `?`. It is passed the argument list containing the metacharacters; glob expands the list and calls the command itself
+
+Traveling back to the 70s, here's a how the original page looked like ([source](https://www.bell-labs.com/usr/dmr/www/man71.pdf)):
+
+![glob](glob.png)
 
 ### And by the way, what does “git” stand for? Is it an acronym?
 
@@ -334,7 +339,24 @@ Since `.gitignore` does not have a retroactive effect, you need to untrack the f
 
 To tell Git to stop tracking a file (aka ignoring it) you can use `git rm --cached`. 
 
-See also: [How do I make Git forget about a file that was tracked, but is now in .gitignore?](https://stackoverflow.com/questions/1274057/how-do-i-make-git-forget-about-a-file-that-was-tracked-but-is-now-in-gitignore).
+See also [“How do I make Git forget about a file that was tracked, but is now in .gitignore?”](https://stackoverflow.com/questions/1274057/how-do-i-make-git-forget-about-a-file-that-was-tracked-but-is-now-in-gitignore).
+
+## An epic question on StackOverflow 
+
+The question [“How do I make Git forget about a file that was tracked, but is now in .gitignore?”](https://stackoverflow.com/questions/1274057/how-do-i-make-git-forget-about-a-file-that-was-tracked-but-is-now-in-gitignore) ranks $8$ in the list of the top $10$ questions on StackOverflow tagged `git` (source: [data.stackexchange.com](https://data.stackexchange.com/stackoverflow/query/524537/11-great-questions-by-score-for-given-tagname-idug-presentation)) and with a score of $8241$ it can be indeed considered epic!
+
+Post Link|Score|tags|creationdate
+---|---|---|---|
+[How do I undo the most recent local commits in Git?](https://stackoverflow.com/q/927358)|26326|`git` `version-control` `git-commit` `undo`|2009-05-29 18:09:14
+[How do I delete a Git branch locally and remotely?](https://stackoverflow.com/q/2003505)|20387|`git` `version-control` `git-branch` `git-push` `git-remote`|2010-01-05 01:12:15
+[What is the difference between 'git pull' and 'git fetch'?](https://stackoverflow.com/q/292357)|13816|`git` `version-control` `git-pull` `git-fetch`|2008-11-15 09:51:09
+[How can I rename a local Git branch?](https://stackoverflow.com/q/6591213)|11594|`git` `version-control` `git-branch`|2011-07-06 03:20:36
+[How do I undo 'git add' before commit?](https://stackoverflow.com/q/348170)|11331|`git` `undo` `git-add`|2008-12-07 21:57:46
+[How do I force "git pull" to overwrite local files?](https://stackoverflow.com/q/1125968)|9635|`git` `version-control` `overwrite` `git-pull` `git-fetch`|2009-07-14 14:58:15
+[How do I check out a remote Git branch?](https://stackoverflow.com/q/1783405)|8631|`git` `git-checkout` `remote-branch`|2009-11-23 14:23:46
+[How do I make Git forget about a file that was tracked, but is now in .gitignore?](https://stackoverflow.com/q/1274057)|8241|`git` `gitignore` `git-rm`|2009-08-13 19:23:22
+[How do I remove local (untracked) files from the current Git working tree?](https://stackoverflow.com/q/61212)|8123|`git` `branch` `git-branch`|2008-09-14 09:06:10
+[How to modify existing, unpushed commit messages? ](https://stackoverflow.com/q/179123)|7648|`git` `git-commit` `git-rewrite-history` `git-amend`|2008-10-07 15:44:47
 
 ## Example
 
