@@ -151,7 +151,7 @@ In summary, excluding files using `.gitignore` promotes efficient repository man
 
 Adding files containing sensitive information to `.gitignore` is not a good idea and you should better keep those files in a different location than your Git workspace.
 
-`.gitignore` does not provide foolproof protection against unintentional disclosure of confidential data (think of the case that a collaborator deletes the `.gitignore` file). To mitigate the risk of disclosing sensitive information it crucial to implement additional security measures, such as proper access controls, encryption, and regular audits.
+`.gitignore` does not provide foolproof protection against unintentional disclosure of confidential data (think of the case that a collaborator deletes the `.gitignore` file). To mitigate the risk of disclosing sensitive information it is crucial to implement additional security measures, such as proper access controls, encryption, and regular audits.
 
 Here are some recommended practices for handling sensitive data in a Git repository:
 - **Avoid Hardcoding Secrets:** refrain from hardcoding sensitive information directly into the source code. Use configuration files or environment variables instead. Save a template to your Git repository and the actual secrets locally or in a vault service.
@@ -354,7 +354,7 @@ Post Link|Score|tags|creationdate
 [How do I undo 'git add' before commit?](https://stackoverflow.com/q/348170)|11331|`git` `undo` `git-add`|2008-12-07 21:57:46
 [How do I force "git pull" to overwrite local files?](https://stackoverflow.com/q/1125968)|9635|`git` `version-control` `overwrite` `git-pull` `git-fetch`|2009-07-14 14:58:15
 [How do I check out a remote Git branch?](https://stackoverflow.com/q/1783405)|8631|`git` `git-checkout` `remote-branch`|2009-11-23 14:23:46
-[How do I make Git forget about a file that was tracked, but is now in .gitignore?](https://stackoverflow.com/q/1274057)|8241|`git` `gitignore` `git-rm`|2009-08-13 19:23:22
+**[How do I make Git forget about a file that was tracked, but is now in .gitignore?](https://stackoverflow.com/q/1274057)**|**8241**|**`git`** **`gitignore`** **`git-rm`**|**2009-08-13 19:23:22**
 [How do I remove local (untracked) files from the current Git working tree?](https://stackoverflow.com/q/61212)|8123|`git` `branch` `git-branch`|2008-09-14 09:06:10
 [How to modify existing, unpushed commit messages? ](https://stackoverflow.com/q/179123)|7648|`git` `git-commit` `git-rewrite-history` `git-amend`|2008-10-07 15:44:47
 
