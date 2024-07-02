@@ -521,7 +521,7 @@ Here's a list of of common ignore files used in different contexts other than Gi
  
 # Where to locate examples of ignore files?
 
-You can use [Git's advanced search]() to discover a variety of ignore files for inspiration. 
+You can use [GitHub's advanced search](https://github.com/search/advanced) to discover a variety of ignore files for inspiration. 
 
 You can search by path
 
