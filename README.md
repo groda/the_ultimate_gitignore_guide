@@ -4,7 +4,7 @@
 
 _in form of a Q&A_
 
-<!-- TOC start (generated with https://derlin.github.io/bitdowntoc/) -->
+<!-- TOC start -->
 
 - [TL;DR](#tldr)
 - [What is `.gitignore`?](#what-is-gitignore)
@@ -21,11 +21,11 @@ _in form of a Q&A_
 - [How to format a `.gitignore` file?](#how-to-format-a-gitignore-file)
    * [Some examples ](#some-examples)
 - [How to check which files will be ignored?](#how-to-check-which-files-will-be-ignored)
-   * [An epic question on StackOverflow](#an-epic-question-on-stackoverflow)
    * [Example](#example)
    * [A useful command to check all ignored files](#a-useful-command-to-check-all-ignored-files)
 - [What happens to files that were being tracked before adding `.gitignore`?](#what-happens-to-files-that-were-being-tracked-before-adding-gitignore)
 - [How to stop tracking previously tracked files?](#how-to-stop-tracking-previously-tracked-files)
+   * [An epic question on StackOverflow](#an-epic-question-on-stackoverflow)
    * [Example](#example-1)
 - [Why would I want to ignore `.gitignore`?](#why-would-i-want-to-ignore-gitignore)
 - [Where should I put `.gitignore`?](#where-should-i-put-gitignore)
@@ -33,6 +33,9 @@ _in form of a Q&A_
 - [And what is `.gitkeep`?](#and-what-is-gitkeep)
    * [Why does Git ignore empty folders?](#why-does-git-ignore-empty-folders)
    * [Diversion: Deep dive into Git's content-oriented storage](#diversion-deep-dive-into-gits-content-oriented-storage)
+      + [Internal representation of files in Git storage](internal-representation-of-files-in-git-storage)
+      + [Internal representation of directory structure in Git storage](internal-representation-of-directory-structure-in-git-storage)
+      + [Example](#example-2)
 - [Did Git first introduce ignore functionality and glob pattern usage?](#did-git-first-introduce-ignore-functionality-and-glob-pattern-usage)
 - [What are some other common ignore files in software development?](#what-are-some-other-common-ignore-files-in-software-development)
 - [Where to locate examples of ignore files?](#where-to-locate-examples-of-ignore-files)
@@ -508,13 +511,13 @@ This approach makes sense not only from a performance perspective—since empty 
 
 To clarify further, Git's storage system consists of two components: a _content-addressable mechanism_ for storing file data and a structure that tracks the directory hierarchy.
 
-**Internal representation of files in Git storage**
+### Internal representation of files in Git storage
 
 Before being stored, files are hashed by computing a cryptographic hash (SHA-1) of the file's content. This hash is a unique 40-character string that acts as an identifier for the file in Git’s internal repository. Even if the file is renamed or moved, as long as the content remains the same, its hash will stay the same. This system makes Git very efficient when handling identical content across different versions of files, even if the file names change or the file is moved in the directory structure. 
 
 A file is saved as _blob object_ (raw content of the file without any metadata like file name or location) and, since files are indexed by their hashes, if two files have the same content, Git only stores one blob and references it in multiple places.
 
-**Internal representation of directory structure in Git storage**
+### Internal representation of directory structure in Git storage
 
 Git does track the directory structure of files, but it does so in a separate step from the content. While file content is stored as _blob object_, the file names and directory hierarchy are stored using _tree objects_. 
 
@@ -523,7 +526,7 @@ A tree object represents a directory. It contains references (pointers) to other
   - blobs (which represent file content)
   - other tree objects (which represent subdirectories)
 
-**Example**
+### Example
 
 Let’s say you have a project with this structure:
 
