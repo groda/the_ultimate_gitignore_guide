@@ -20,6 +20,7 @@ _in form of a Q&A_
    * [Online `.gitignore` generator](#online-gitignore-generator)
 - [How to format a `.gitignore` file?](#how-to-format-a-gitignore-file)
    * [Some examples ](#some-examples)
+   * [Handling exceptions: understanding unexpected behavior in `.gitignore` negation patterns](handling-exceptions-understanding-unexpected-behavior-in-gitignore-negation-patterns)
 - [How to check which files will be ignored?](#how-to-check-which-files-will-be-ignored)
    * [Example](#example)
    * [A useful command to check all ignored files](#a-useful-command-to-check-all-ignored-files)
@@ -278,7 +279,29 @@ But if `.gitignore` file contains the lines:
 
 then only  `./myFile1` will be skipped.
 
+## Handling exceptions: understanding unexpected behavior in `.gitignore` negation patterns
 
+When using a negation pattern in .gitignore, you might encounter an unexpected result. For example, consider the following `.gitignore` file:
+
+```
+myDir      # Ignore the entire folder
+!myDir/myFile.txt  # Exception: don't ignore myFile.txt
+```
+
+At first glance, you might expect `myFile.txt` to be tracked by Git because you've added an exception. However, this won't work as expected. Once Git ignores a folder, it stops scanning its contents, including any files inside, so `myFile.txt` will still be ignored.
+
+To achieve the desired behavior—ignoring all files in the folder except `myFile.txt`—you need to modify your `.gitignore` like this:
+```
+myDir/*         # Ignore all files in myDir
+!myDir/myFile.txt  # Exception: Track myFile.txt
+```
+This pattern ensures that Git ignores everything in `myDir` but still checks for `myFile.txt` explicitly. With this approach, `myFile.txt` will be tracked while the rest of the folder remains ignored.
+
+The reason why the negation patter has no effect on a file if is parent directory is excluded is that:
+
+> _Git doesn’t list excluded directories for performance reasons, so any patterns on contained files have no effect, no matter where they are defined._
+
+(from: [pattern format](https://git-scm.com/docs/gitignore/en#_pattern_format) in the official documentation).
 
 # How to check which files will be ignored?
 
