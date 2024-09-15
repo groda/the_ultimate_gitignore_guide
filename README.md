@@ -31,6 +31,8 @@ _in form of a Q&A_
 - [Where should I put `.gitignore`?](#where-should-i-put-gitignore)
    * [Order of precedence of `.gitignore` patterns ](#order-of-precedence-of-gitignore-patterns)
 - [And what is `.gitkeep`?](#and-what-is-gitkeep)
+   * [Why does Git ignore empty folders?](#why-does-git-ignore-empty-folders)
+   * [Diversion: Deep dive into Git's content-oriented storage](#diversion-deep-dive-into-gits-content-oriented-storage)
 - [Did Git first introduce ignore functionality and glob pattern usage?](#did-git-first-introduce-ignore-functionality-and-glob-pattern-usage)
 - [What are some other common ignore files in software development?](#what-are-some-other-common-ignore-files-in-software-development)
 - [Where to locate examples of ignore files?](#where-to-locate-examples-of-ignore-files)
@@ -494,7 +496,66 @@ From the [`.gitignore` documentation](https://git-scm.com/docs/gitignore):
 
 While `.gitkeep` is a common choice, any other file name can be used to keep empty directories tracked. Some prefer to use the file `.keep` or even an empty `.gitignore` (or containing the line `!.gitignore` to prevent it from being ignored in case already untracked).
 
-See also: [What are the differences between .gitignore and .gitkeep?](https://stackoverflow.com/questions/7229885/what-are-the-differences-between-gitignore-and-gitkeep).
+See also: [What are the differences between .gitignore and .gitkeep?](https://stackoverflow.com/questions/7229885/what-are-the-differences-between-gitignore-and-gitkeep) and [How do I add an empty directory to a Git repository?](https://stackoverflow.com/questions/115983/how-do-i-add-an-empty-directory-to-a-git-repository/932982).
+
+## Why does Git ignore empty folders?
+
+Git tracks content rather than the directory structure itself, meaning that it tracks and identifies files based on their content, not their file names or locations. The directory structure is recorded separately, but empty folders are ignored because they contain no content to track.
+
+This approach makes sense not only from a performance perspective—since empty folders could add unnecessary overhead—but also conceptually, as Git is designed to track meaningful content changes. An empty folder doesn’t represent a significant change in version control, so it’s excluded.
+
+## Diversion: Deep dive into Git's content-oriented storage
+
+To clarify further, Git's storage system consists of two components: a _content-addressable mechanism_ for storing file data and a structure that tracks the directory hierarchy.
+
+**Internal representation of files in Git storage**
+
+Before being stored, files are hashed by computing a cryptographic hash (SHA-1) of the file's content. This hash is a unique 40-character string that acts as an identifier for the file in Git’s internal repository. Even if the file is renamed or moved, as long as the content remains the same, its hash will stay the same. This system makes Git very efficient when handling identical content across different versions of files, even if the file names change or the file is moved in the directory structure. 
+
+A file is saved as _blob object_ (raw content of the file without any metadata like file name or location) and, since files are indexed by their hashes, if two files have the same content, Git only stores one blob and references it in multiple places.
+
+**Internal representation of directory structure in Git storage**
+
+Git does track the directory structure of files, but it does so in a separate step from the content. While file content is stored as _blob object_, the file names and directory hierarchy are stored using _tree objects_. 
+
+A tree object represents a directory. It contains references (pointers) to other objects in the repository, such as:
+
+  - blobs (which represent file content)
+  - other tree objects (which represent subdirectories)
+
+**Example**
+
+Let’s say you have a project with this structure:
+
+```
+project/
+├── docs/         (empty folder)
+├── src/
+│   └── main.c
+├── README.md
+└── hello_file
+```
+
+ - The `README.md` file’s content is stored in a blob object with a SHA-1 hash, for example, `aaf4c61ddcc5e8a2dabede0f3b482cd9aea9434d`.
+ - If the content of `hello_file` is different from that of `README.md`, it is stored in a separate blob object with its own unique SHA-1 hash. If `hello_file` has the same content as `README.md`, Git will reference the existing blob object instead of creating a new one.  
+ - The `src/` directory is represented as a tree object, which references the blob for `main.c`.
+ - The root `project/` directory is another tree object, which references the blob(s) for `README.md` and `hello_file`, as well as the tree for `src/`.
+ - The `docs/` folder is ignored by Git because it is empty.
+
+To track the `docs/` folder, you would typically add a placeholder file like `.gitkeep`:
+
+```
+project/
+├── docs/
+│   └── .gitkeep  (placeholder file to track empty folder)
+├── src/
+│   └── main.c
+├── README.md
+└── hello_file
+```
+
+By adding `.gitkeep`, Git now recognizes and tracks the `docs/` directory.
+
 
 # Did Git first introduce ignore functionality and glob pattern usage?
 
