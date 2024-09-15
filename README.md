@@ -33,14 +33,14 @@ _in form of a Q&A_
    * [Order of precedence of `.gitignore` patterns ](#order-of-precedence-of-gitignore-patterns)
 - [And what is `.gitkeep`?](#and-what-is-gitkeep)
    * [Why does Git ignore empty folders?](#why-does-git-ignore-empty-folders)
-   * [Diversion: Deep dive into Git's content-oriented storage](#diversion-deep-dive-into-gits-content-oriented-storage)
+   * [Digression: Deep dive into Git's content-oriented storage](#digression-deep-dive-into-gits-content-oriented-storage)
       + [Internal representation of files in Git storage](#internal-representation-of-files-in-git-storage)
       + [Internal representation of directory structure in Git storage](#internal-representation-of-directory-structure-in-git-storage)
       + [Example](#example-2)
 - [Did Git first introduce ignore functionality and glob pattern usage?](#did-git-first-introduce-ignore-functionality-and-glob-pattern-usage)
 - [What are some other common ignore files in software development?](#what-are-some-other-common-ignore-files-in-software-development)
 - [Where to locate examples of ignore files?](#where-to-locate-examples-of-ignore-files)
-- [Sources / further reading](#sources-and-further-reading)
+- [Sources / further reading](#additional-resources-and-further-reading)
 
 <!-- TOC end -->
 
@@ -290,7 +290,7 @@ myDir      # Ignore the entire myDir folder
 
 At first glance, you might expect `myFile.txt` to be tracked by Git because you've added an exception. However, this won't work as expected. Once Git ignores a folder, it stops scanning its contents, including any files inside, so `myFile.txt` will still be ignored.
 
-The reason why the negation patter has no effect on a file if is parent directory is excluded is that:
+The reason why the negation pattern has no effect on a file if is parent directory is excluded is that:
 
 > _Git doesn’t list excluded directories for performance reasons, so any patterns on contained files have no effect, no matter where they are defined._
 
@@ -531,7 +531,7 @@ Git tracks content rather than the directory structure itself, meaning that it t
 
 This approach makes sense not only from a performance perspective—since empty folders could add unnecessary overhead—but also conceptually, as Git is designed to track meaningful content changes. An empty folder doesn’t represent a significant change in version control, so it’s excluded.
 
-## Diversion: Deep dive into Git's content-oriented storage
+## Digression: Deep dive into Git's content-oriented storage
 
 To clarify further, Git's storage system consists of two components: a _content-addressable mechanism_ for storing file data and a structure that tracks the directory hierarchy.
 
@@ -549,6 +549,8 @@ A tree object represents a directory. It contains references (pointers) to other
 
   - blobs (which represent file content)
   - other tree objects (which represent subdirectories)
+
+A thorough description of Git's internal data representation and storage mechanisms can be found in ['Git from the Bottom Up'](http://ftp.newartisans.com/pub/git.from.bottom.up.pdf).
 
 ### Example
 
@@ -625,18 +627,17 @@ or there's even a programming language called “Ignore List”
 
 As an aside, I'd like to mention that I find GitHub's search feature ([https://github.com/search](https://github.com/search)) very helpful for discovering interesting repositories or code snippets.
 
-# Sources and further reading
-
-See also:
+# Additional resources and further reading
 
 - [Ignoring files](https://docs.github.com/en/get-started/getting-started-with-git/ignoring-files) A quick start guide on how to configure Git to ignore files you don't want to check in to GitHub.
 - [gitignore](https://git-scm.com/docs/gitignore) by the Git community
-- Pro Git book, by Scott Chacon and Ben Straub available [online](https://git-scm.com/book/en/v2)
+- Pro Git book, by Scott Chacon and Ben Straub available [online](https://git-scm.com/book/en/v2). A thorough and accessible guide to Git, covering everything from the basics to advanced usage.
 - [Ignore files that have already been committed to a Git repository](https://stackoverflow.com/questions/1139762/ignore-files-that-have-already-been-committed-to-a-git-repository/1139797#1139797)
 - [How do I make Git forget about a file that was tracked, but is now in .gitignore?](https://stackoverflow.com/questions/1274057/how-do-i-make-git-forget-about-a-file-that-was-tracked-but-is-now-in-gitignore)
-- [.gitignore](https://www.atlassian.com/git/tutorials/saving-changes/gitignore) A clearly presented, well-structured, and easily comprehensible tutorial on `gitignore` by Atlassian
+- [.gitignore](https://www.atlassian.com/git/tutorials/saving-changes/gitignore) A clearly presented, well-structured, and easily comprehensible tutorial on `gitignore` by Atlassian.
+- [Git from the bottom up](http://ftp.newartisans.com/pub/git.from.bottom.up.pdf) A comprehensive guide that delves into the inner workings and architecture of Git, explaining how Git operates at a fundamental level and how its core principles influence its behavior.
 - [Multiple .gitignore in subfolders](https://stackoverflow.com/questions/53208235/multiple-gitignore-in-subfolders)
 - [Don't ignore .gitignore](https://opensource.com/article/20/8/dont-ignore-gitignore)
 - [Learning All about GitIgnore : Ignoring Files and Folders](https://medium.com/@it.hhkn/learning-all-about-gitignore-ignoring-files-and-folders-d731998a7790)
 - [Git command to show which specific files are ignored by .gitignore](https://stackoverflow.com/questions/466764/git-command-to-show-which-specific-files-are-ignored-by-gitignore)
-- [git-check-ignore](https://git-scm.com/docs/git-check-ignore)
+- [git-check-ignore](https://git-scm.com/docs/git-check-ignore) Documentation on the `git-check-ignore` tool for debugging `.gitignore`.
