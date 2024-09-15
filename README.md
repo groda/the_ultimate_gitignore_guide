@@ -20,7 +20,7 @@ _in form of a Q&A_
    * [Online `.gitignore` generator](#online-gitignore-generator)
 - [How to format a `.gitignore` file?](#how-to-format-a-gitignore-file)
    * [Some examples ](#some-examples)
-   * [Handling exceptions: understanding unexpected behavior in `.gitignore` negation patterns](handling-exceptions-understanding-unexpected-behavior-in-gitignore-negation-patterns)
+   * [Handling exceptions: understanding unexpected behavior in `.gitignore` negation patterns](#handling-exceptions-understanding-unexpected-behavior-in-gitignore-negation-patterns)
 - [How to check which files will be ignored?](#how-to-check-which-files-will-be-ignored)
    * [Example](#example)
    * [A useful command to check all ignored files](#a-useful-command-to-check-all-ignored-files)
