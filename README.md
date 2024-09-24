@@ -37,6 +37,7 @@ _in form of a Q&A_
       + [Internal representation of files in Git storage](#internal-representation-of-files-in-git-storage)
       + [Internal representation of directory structure in Git storage](#internal-representation-of-directory-structure-in-git-storage)
       + [Example](#example-2)
+- [What gitmoji should I use when adding or updating a .gitignore file?](#what-gitmoji-should-i-use-when-adding-or-updating-a-gitignore-file)
 - [Did Git first introduce ignore functionality and glob pattern usage?](#did-git-first-introduce-ignore-functionality-and-glob-pattern-usage)
 - [What are some other common ignore files in software development?](#what-are-some-other-common-ignore-files-in-software-development)
 - [Where to locate examples of ignore files?](#where-to-locate-examples-of-ignore-files)
@@ -525,6 +526,7 @@ While `.gitkeep` is a common choice, any other file name can be used to keep emp
 
 See also: [What are the differences between .gitignore and .gitkeep?](https://stackoverflow.com/questions/7229885/what-are-the-differences-between-gitignore-and-gitkeep) and [How do I add an empty directory to a Git repository?](https://stackoverflow.com/questions/115983/how-do-i-add-an-empty-directory-to-a-git-repository/932982).
 
+
 ## Why does Git ignore empty folders?
 
 Git tracks content rather than the directory structure itself, meaning that it tracks and identifies files based on their content, not their file names or locations. The directory structure is recorded separately, but empty folders are ignored because they contain no content to track.
@@ -585,7 +587,14 @@ project/
 
 By adding `.gitkeep`, Git now recognizes and tracks the `docs/` directory.
 
+# What gitmoji should I use when adding or updating a .gitignore file?
 
+The use of emojis in software development and documentation has emerged as a playful yet effective way to enhance communication and clarity. In the Git world, emojis are referred to as _gitmojis_, and there is an initiative ([https://gitmoji.dev/](https://gitmoji.dev/)) aimed at standardizing their use to represent various types of commits.
+
+Based on the Gitmoji convention, the correct emoji for committing changes to a `.gitignore` file is: 🙈 (:see_no_evil:). A commit message would look like:
+
+    🙈 Add .gitignore
+ 
 # Did Git first introduce ignore functionality and glob pattern usage?
 
 No, Git's `.gitignore` files were not the first to introduce ignore functionality and glob patterns. These features already existed in other version control systems before Git. For example:
