@@ -37,7 +37,7 @@ _in form of a Q&A_
       + [Internal representation of files in Git storage](#internal-representation-of-files-in-git-storage)
       + [Internal representation of directory structure in Git storage](#internal-representation-of-directory-structure-in-git-storage)
       + [Example](#example-2)
-- [What gitmoji should I use when adding or updating a .gitignore file?](#what-gitmoji-should-i-use-when-adding-or-updating-a-gitignore-file)
+- [What gitmoji should I use when adding or updating a `.gitignore` file?](#what-gitmoji-should-i-use-when-adding-or-updating-a-gitignore-file)
 - [Did Git first introduce ignore functionality and glob pattern usage?](#did-git-first-introduce-ignore-functionality-and-glob-pattern-usage)
 - [What are some other common ignore files in software development?](#what-are-some-other-common-ignore-files-in-software-development)
 - [Where to locate examples of ignore files?](#where-to-locate-examples-of-ignore-files)
@@ -587,7 +587,7 @@ project/
 
 By adding `.gitkeep`, Git now recognizes and tracks the `docs/` directory.
 
-# What gitmoji should I use when adding or updating a .gitignore file?
+# What gitmoji should I use when adding or updating a `.gitignore` file?
 
 The use of emojis in software development and documentation has emerged as a playful yet effective way to enhance communication and clarity. In the Git world, emojis are referred to as _gitmojis_, and there is an initiative ([https://gitmoji.dev/](https://gitmoji.dev/)) aimed at standardizing their use to represent various types of commits.
 
