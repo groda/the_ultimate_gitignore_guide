@@ -31,6 +31,9 @@ _in form of a Q&A_
 - [Why would I want to ignore `.gitignore`?](#why-would-i-want-to-ignore-gitignore)
 - [Where should I put `.gitignore`?](#where-should-i-put-gitignore)
    * [Order of precedence of `.gitignore` patterns ](#order-of-precedence-of-gitignore-patterns)
+- [What's the difference between `.gitignore` and `~/.gitignore_global`](#whats-the-difference-between-gitignore-and-gitignore_global)
+- [What's the difference between `.gitignore` and `.git/info/exclude`?](#whats-the-difference-between-gitignore-and-gitinfoexclude)
+- [What's the order of precedence for all these ignore files?](#whats-the-order-of-precedence-for-all-these-ignore-files)
 - [And what is `.gitkeep`?](#and-what-is-gitkeep)
    * [Why does Git ignore empty folders?](#why-does-git-ignore-empty-folders)
    * [Digression: Deep dive into Git's content-oriented storage](#digression-deep-dive-into-gits-content-oriented-storage)
@@ -483,18 +486,6 @@ and it is not tracked by `git` anymore
     gitignore_tests % 
 
 
-
-# Why would I want to ignore `.gitignore`?
-
-Oftentimes one finds the line 
-
-    .gitignore
-
-in `.gitignore` files. 
-
-This is not good practice but be aware that it is allowed.
-
-
 # Where should I put `.gitignore`?
 
 `.gitignore` is usually located in Git project's working directory (this is the directory containing the `.git` folder, the actual Git repository). 
@@ -517,6 +508,59 @@ From the [`.gitignore` documentation](https://git-scm.com/docs/gitignore):
 > - Patterns read from `$GIT_DIR/info/exclude`.
 > 
 > - Patterns read from the file specified by the configuration variable `core.excludesFile`.
+
+# What's the difference between `.gitignore` and `~/.gitignore_global`?
+
+Another important ignore file is the `~/.gitignore_global`. This file resides on your local machine and is specific to your user account; it is not shared with others and is not tracked by Git.
+
+In this file, you can define ignore rules using the same format as in `.gitignore`. These rules apply universally across all projects you work on, allowing you to keep your development environment organized by ignoring files that are specific to your setup or tooling.
+
+
+# What's the difference between `.gitignore` 	and `.git/info/exclude`?
+
+The `exclude` file—located in the `.git` folder under `info`—is similar to `.gitignore`, but it is used for local ignore rules that are specific to a particular repository on a developer's machine.
+
+The `.git` directory is a special hidden folder that is not tracked by Git and it contains all the metadata and configuration files Git needs to manage the repository. This means that the file `.git/info/exclude`:
+
+  - is only visible to the developer on the local machine
+  - is not tracked by Git
+  
+Git reads the local `.git/info/exclude` file whenever you run commands like `git status`, `git add`, or `git commit` to determine which files should be ignored and not included in the list of "untracked files."
+A file listed only in `.git/info/exclude`, but not in `.gitignore`, will just be ignored when you run Git commands, but others won’t see that rule because `.git/info/exclude` is only for your local setup.
+
+
+
+# What's the order of precedence for all these ignore files?
+
+Here is the priority list that Git follows to determine which set of ignore rules to apply when there are multiple places where files can be ignored, from most to least important:
+
+1. `.gitignore`
+2. `~/.gitignore_global`
+3. `.git/info/exclude`
+ 
+# Why would I want to ignore `.gitignore`?
+
+Oftentimes one finds the line 
+
+    .gitignore
+
+in `.gitignore` files. 
+
+Even though this is allowed, it is not considered good practice because it can lead to inconsistencies in what files are ignored for different users or environments, as collaborators won’t receive updates to these rules.
+
+There are some situations when ignoring `.gitignore` is justified:
+
+- personal development environments: A developer might ignore their `.gitignore` if they have custom rules (defined in `.git/info/exclude` or `~/.gitignore_global`) that are specific to their local setup and don't want to share them with the team. 
+- temporary solutions: for instance, a developer is working on a web application that requires various local configuration files, such as `.env` files, which contain sensitive data. To ensure that the `local.env` file is never accidentally committed to the repository, the developer adds the lines
+
+ ```
+ # .gitignore (temporary modification)
+ .gitignore
+ local.env
+ ```
+ to make sure that `.gitignore` is not changed anymore (which might lead to `local.env` getting tracked).
+
+
 
 # And what is `.gitkeep`?
 
