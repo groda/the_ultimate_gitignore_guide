@@ -31,7 +31,7 @@ _in form of a Q&A_
 - [Why would I want to ignore `.gitignore`?](#why-would-i-want-to-ignore-gitignore)
 - [Where should I put `.gitignore`?](#where-should-i-put-gitignore)
    * [Order of precedence of `.gitignore` patterns ](#order-of-precedence-of-gitignore-patterns)
-- [What's the difference between `.gitignore` and `~/.gitignore_global`](#whats-the-difference-between-gitignore-and-gitignore_global)
+- [What's the difference between `.gitignore` and `~/.gitignore_global`?](#whats-the-difference-between-gitignore-and-gitignore_global)
 - [What's the difference between `.gitignore` and `.git/info/exclude`?](#whats-the-difference-between-gitignore-and-gitinfoexclude)
 - [What's the order of precedence for all these ignore files?](#whats-the-order-of-precedence-for-all-these-ignore-files)
 - [And what is `.gitkeep`?](#and-what-is-gitkeep)
