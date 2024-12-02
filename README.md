@@ -9,6 +9,7 @@ _in form of a Q&A_
 - [TL;DR](#tldr)
 - [What is `.gitignore`?](#what-is-gitignore)
    * [Note that `.gitignore` starts with a `.`](#note-that-gitignore-starts-with-a-)
+- [Is `.gitignore` mandatory?](#is-gitignore-mandatory)
 - [Which files would I want to ignore?](#which-files-would-i-want-to-ignore)
    * [A mini-introduction to globbing](#a-mini-introduction-to-globbing)
       + [Is “glob” an English word?](#is-glob-an-english-word)
@@ -91,6 +92,30 @@ See also:
 - [What are dot-files?](https://askubuntu.com/questions/94780/what-are-dot-files) on [askubuntu.com](https://askubuntu.com)
 - [Awesome dotfiles](https://github.com/webpro/awesome-dotfiles), a curated list of dotfiles resources, and 
 - [https://dotfiles.github.io/](https://dotfiles.github.io/), a guide to dotfiles on GitHub.
+
+# Is `.gitignore` mandatory?
+
+This question was raised [on Reddit](https://www.reddit.com/r/git/comments/o1lyko/is_gitignore_mandatory), and the answer is no—it’s not required.
+
+The `.gitignore` file is simply a convenience that helps manage which files you wish Git to ignore.
+
+That said, including a `.gitignore` file in your repository is a best practice that can elevate the professionalism of your project. You can even initialize it with a placeholder comment, and update it later as needed. 
+
+Create the file in the root of your repository:
+```
+touch .gitignore
+```
+
+Edit the file and add the comment:
+```
+# Placeholder for .gitignore rules
+# Add patterns to ignore files and directories
+# Example: *.log to ignore all log files
+```
+
+Not only will a `.gitignore` file make your repository look more polished, but it will also motivate you to watch out for unnecessary files cluttering your version control.
+
+By the way, both GitHub and GitLab provide the option to create a `.gitignore` file based on language-specific templates when initializing a new project.
 
 # Which files would I want to ignore?
 
