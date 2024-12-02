@@ -31,7 +31,7 @@ _in form of a Q&A_
 - [Why would I want to ignore `.gitignore`?](#why-would-i-want-to-ignore-gitignore)
 - [Where should I put `.gitignore`?](#where-should-i-put-gitignore)
    * [Order of precedence of `.gitignore` patterns](#order-of-precedence-of-gitignore-patterns)
-   * [Which Git commands support passing `.gitignore` patterns  via the command line?](#which-git-commands-support-passing-gitignore-patterns-via-the-command-line)
+   * [Which Git commands support passing `.gitignore` patterns via the command line?](#which-git-commands-support-passing-gitignore-patterns-via-the-command-line)
       + [Preventing specific files from being removed by `git clean`](#preventing-specific-files-from-being-removed-by-git-clean)
       + [Using `git ls-files` with exclude patterns](#using-git-ls-files-with-exclude-patterns)
 - [What's the difference between `.gitignore` and `~/.gitignore_global`?](#whats-the-difference-between-gitignore-and-gitignore_global)
@@ -513,7 +513,7 @@ From the [`.gitignore` documentation](https://git-scm.com/docs/gitignore):
 > - Patterns read from the file specified by the configuration variable `core.excludesFile`.
 
 
-## Which Git commands support passing `.gitignore` patterns  via the command line?
+## Which Git commands support passing `.gitignore` patterns via the command line?
 
 Among the commands that support gitignore patterns are `git clean` with the `-e` option and `git ls-files` with the `--exclude` option.
 
