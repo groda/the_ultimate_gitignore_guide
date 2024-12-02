@@ -587,10 +587,11 @@ src/file2.tmp
 ```
 
 With the `--exclude` option we can omit certain files from the listing.
-
+```
 $ git ls-files --others --exclude="*.log"
 file1.tmp
 src/file2.tmp
+```
 
 # What's the difference between `.gitignore` and `~/.gitignore_global`?
 
