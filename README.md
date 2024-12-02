@@ -30,7 +30,10 @@ _in form of a Q&A_
    * [Example](#example-1)
 - [Why would I want to ignore `.gitignore`?](#why-would-i-want-to-ignore-gitignore)
 - [Where should I put `.gitignore`?](#where-should-i-put-gitignore)
-   * [Order of precedence of `.gitignore` patterns ](#order-of-precedence-of-gitignore-patterns)
+   * [Order of precedence of `.gitignore` patterns](#order-of-precedence-of-gitignore-patterns)
+   * [Which Git commands support passing `.gitignore` patterns  via the command line?](#which-git-commands-support-passing-gitignore-patterns-via-the-command-line)
+      + [Preventing specific files from being removed by `git clean`](#preventing-specific-files-from-being-removed-by-git-clean)
+      + [Using `git ls-files` with exclude patterns](#using-git-ls-files-with-exclude-patterns)
 - [What's the difference between `.gitignore` and `~/.gitignore_global`?](#whats-the-difference-between-gitignore-and-gitignore_global)
 - [What's the difference between `.gitignore` and `.git/info/exclude`?](#whats-the-difference-between-gitignore-and-gitinfoexclude)
 - [What's the order of precedence for all these ignore files?](#whats-the-order-of-precedence-for-all-these-ignore-files)
@@ -97,7 +100,7 @@ For example, the line:
 
     *.log
     
-in a `.gitignore` file will tell Git to ignore all files with the extension `.log` (the asterisk `*` is known as a _globbing pattern_.
+in a `.gitignore` file will tell Git to ignore all files with the extension `.log` (the asterisk `*` is known as a _globbing pattern_).
 
 ## A mini-introduction to globbing
 
@@ -358,7 +361,7 @@ Check all files in the Git working directory:
     
 This command will scan all files and folders in your current directory and check whether they're going to be ignored according to the directives in `.gitignore`. For files that are going to get ignored the `.gitignore` rule is also indicated (line number in `.gitignore`) when using the option `-v`.
 
-Credit for the `find` command: [this answer on Stackoverflow](https://stackoverflow.com/a/467053) (_Git command to show which specific files are ignored by .gitignore_).
+Credit for the `find` command: [this answer on Stackoverflow](https://stackoverflow.com/a/467053) (“_Git command to show which specific files are ignored by .gitignore_”).
 
  
 # What happens to files that were being tracked before adding `.gitignore`?
@@ -501,13 +504,93 @@ From the [`.gitignore` documentation](https://git-scm.com/docs/gitignore):
 
 > Each line in a gitignore file specifies a pattern. When deciding whether to ignore a path, Git normally checks gitignore patterns from multiple sources, with the following order of precedence, from highest to lowest (within one level of precedence, the last matching pattern decides the outcome):
 > 
-> - Patterns read from the command line for those commands that support them.
+> - Patterns read from the command line for those commands that support them (see [Which Git commands support passing `.gitignore` patterns  via the command line?](#which-git-commands-support-passing-gitignore-patterns-via-the-command-line)).
 > 
 > - Patterns read from a `.gitignore` file in the same directory as the path, or in any parent directory (up to the top-level of the working tree), with patterns in the higher level files being overridden by those in lower level files down to the directory containing the file. These patterns match relative to the location of the `.gitignore` file. A project normally includes such `.gitignore` files in its repository, containing patterns for files generated as part of the project build.
 > 
 > - Patterns read from `$GIT_DIR/info/exclude`.
 > 
 > - Patterns read from the file specified by the configuration variable `core.excludesFile`.
+
+
+## Which Git commands support passing `.gitignore` patterns  via the command line?
+
+Among the commands that support gitignore patterns are `git clean` with the `-e` option and `git ls-files` with the `--exclude` option.
+
+### Preventing specific files from being removed by `git clean`
+
+While `.gitignore` helps keep your Git repository organized by excluding unnecessary files, there are times when you need to declutter your working directory itself — and that’s where `git clean` comes in handy.
+
+The [`git clean`](https://git-scm.com/docs/git-clean) command does exactly what its name suggests: it "cleans up" your working directory by removing files you don't care about—often referred to as "unmanaged" or "non-essential" files. These include files that are either untracked, ignored, or both, depending on the options you specify when running `git clean`. The command operates recursively from the current directory (which can be a subdirectory of subdirectory of your working directory), and respects the exclude rules specified in `.gitignore`.
+
+**Caution:** the `git clean` command should _always be used with caution_, as it can permanently delete untracked files or directories from your working directory! 
+
+Think of it as tidying up a cluttered desk: you sweep away scraps of paper and junk (untracked or ignored files) but must be careful not to toss out anything important (valuable files you want to keep). The option [`-n`](https://git-scm.com/docs/git-clean#Documentation/git-clean.txt--n) (or equivalently [`--dry-run`](https://git-scm.com/docs/git-clean#Documentation/git-clean.txt--n)) enables the safe use of `git clean` by displaying which files would be deleted without actually removing them.  This is like sorting through the pile first to ensure nothing crucial gets thrown away.
+
+Next, let's look at an example of using the `-e <pattern>` option (equivalent to `--exclude=<pattern>`) with `git clean`. The `-e` option allows you to specify patterns to exclude certain files from being cleaned, in addition to those already ignored by the `.gitignore` rules.
+
+**Example:**
+
+```
+git clean -dx --dry-run -e "*.log" 
+```
+
+Assume your repository has this structure
+
+```
+project
+├── .gitignore
+|-- file1.tmp
+`-- src
+    ├── file2.tmp
+    `-- debug.log
+```
+and that the `.gitignore` file contains:
+```
+*.tmp
+*.log
+```
+If you navigate to `project` and run:
+
+```
+git clean -dX --dry-run 
+```
+you will see:
+```
+Would remove file1.tmp
+Would remove src/debug.log
+Would remove src/file2.tmp
+```
+Note that if we hadn't used the `-d` option we would not have cleaned up the `src` directory, that is untracked since it contains only ignored files.
+
+With the option `-e` we can exclude certain files using `.gitignore` patterns. For instance, if we want to keep `*.log` files we can use:
+```
+git clean -dX -e \!*.log
+```
+Now the output is:
+```
+Would remove file1.tmp
+Would remove src/file2.tmp
+```
+The file `debug.log` is in this case spared from the cleaning because the pattern passed to the `-e` option overrides the `.gitignore` directives.
+
+Notice how you need to use "exclude" patterns wit the option `-e`, which might be counterintuitive to some. Thanks to [this answer](https://stackoverflow.com/a/17156948) on Stack Overflow (“Git: Exclude a file with git clean”).
+
+### Using `git ls-files` with exclude patterns
+
+With the working directory of the previous section, we can use [`git ls-files`](https://git-scm.com/docs/git-ls-files) to view information on files in the working tree, here for instance we are listing all files (they're untracked):
+```
+$ git ls-files --others
+file1.tmp
+src/debug.log
+src/file2.tmp
+```
+
+With the `--exclude` option we can omit certain files from the listing.
+
+$ git ls-files --others --exclude="*.log"
+file1.tmp
+src/file2.tmp
 
 # What's the difference between `.gitignore` and `~/.gitignore_global`?
 
