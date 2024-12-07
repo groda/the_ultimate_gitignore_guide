@@ -403,6 +403,12 @@ To tell Git to stop tracking a file (aka ignoring it) you can use `git rm --cach
 
 See also [“How do I make Git forget about a file that was tracked, but is now in .gitignore?”](https://stackoverflow.com/questions/1274057/how-do-i-make-git-forget-about-a-file-that-was-tracked-but-is-now-in-gitignore).
 
+⚠️ The [top-scoring answer](https://stackoverflow.com/a/1274447) has been recently updated:
+
+> _Do NOT use `git rm --cached <file>` if you ever want to see that file again. It will remove it from git, and also your local machine.
+
+I'll update the guide on this issue as soon as I determine the best practice.
+
 ## An epic question on StackOverflow 
 
 The question [“How do I make Git forget about a file that was tracked, but is now in .gitignore?”](https://stackoverflow.com/questions/1274057/how-do-i-make-git-forget-about-a-file-that-was-tracked-but-is-now-in-gitignore) ranks $8$ in the list of the top $10$ questions on StackOverflow tagged `git` (source: [data.stackexchange.com](https://data.stackexchange.com/stackoverflow/query/524537/11-great-questions-by-score-for-given-tagname-idug-presentation)) and with a score of $8241$, $2.4$ Million views and $46$ answers, it can be indeed considered epic!
