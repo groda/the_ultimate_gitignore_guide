@@ -405,7 +405,7 @@ See also [“How do I make Git forget about a file that was tracked, but is now 
 
 ⚠️ The [top-scoring answer](https://stackoverflow.com/a/1274447) has been recently updated:
 
-> _Do NOT use `git rm --cached <file>` if you ever want to see that file again. It will remove it from git, and also your local machine.
+> _Do NOT use `git rm --cached <file>` if you ever want to see that file again. It will remove it from git, and also your local machine._
 
 I'll update the guide on this issue as soon as I determine the best practice.
 
