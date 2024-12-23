@@ -194,7 +194,7 @@ Adding files containing sensitive information to `.gitignore` is not a good idea
 
 Here are some recommended practices for handling sensitive data in a Git repository:
 - **Avoid Hardcoding Secrets:** refrain from hardcoding sensitive information directly into the source code. Use configuration files or environment variables instead. Save a template to your Git repository and the actual secrets locally or in a vault service.
-- **Security Audits:** use tools like [`git-secrets`](https://github.com/awslabs/git-secrets) or [gitleaks](https://github.com/gitleaks/gitleaks) to scan your code for passwords and other sensitive information before committing it to a git repository.
+- **Security Audits:** use tools like [`git-secrets`](https://github.com/awslabs/git-secrets) or [gitleaks](https://github.com/gitleaks/gitleaks) to scan your code for passwords and other sensitive information before committing it to a Git repository.
 - **Encrypt Sensitive Files:** use [`git-crypt`](https://github.com/AGWA/git-crypt) to protect sensitive files by encrypting them when committed.
 
 
@@ -215,7 +215,7 @@ Adding executables to the `.gitignore` file is a common practice in software dev
 
 The [gitignore](https://github.com/github/gitignore) repository on GitHub provides a collection of `.gitignore` templates for many programming languages.
 
-If you've ever worked with Latex you will be familiar with the `.log`, `.aux`, etc. files that can reasonably be excluded from your Git repository. Here's how an excerpt from the `Tex` template looks like:
+If you've ever worked with LaTeX you will be familiar with the `.log`, `.aux`, etc. files that can reasonably be excluded from your Git repository. Here's how an excerpt from the `Tex` template looks like:
 
 ```
 ## Core latex/pdflatex auxiliary files:
@@ -323,7 +323,7 @@ myDir      # Ignore the entire myDir folder
 
 At first glance, you might expect `myFile.txt` to be tracked by Git because you've added an exception. However, this won't work as expected. Once Git ignores a folder, it stops scanning its contents, including any files inside, so `myFile.txt` will still be ignored.
 
-The reason why the negation pattern has no effect on a file if is parent directory is excluded is that:
+The reason why the negation pattern has no effect on a file if its parent directory is excluded is that:
 
 > _Git doesn’t list excluded directories for performance reasons, so any patterns on contained files have no effect, no matter where they are defined._
 
