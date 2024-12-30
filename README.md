@@ -25,7 +25,9 @@ _in form of a Q&A_
 - [How to check which files will be ignored?](#how-to-check-which-files-will-be-ignored)
    * [Example](#example)
    * [A useful command to check all ignored files](#a-useful-command-to-check-all-ignored-files)
-- [What happens to files that were being tracked before adding `.gitignore`?](#what-happens-to-files-that-were-being-tracked-before-adding-gitignore)
+- [What happens to tracked files after being added to `.gitignore`?](#what-happens-to-tracked-files-after-being-added-to-gitignore)
+   * [A quick reminder: tracked, untracked, and ignored files](#a-quick-reminder-tracked-untracked-and-ignored-files)
+   * [How Git handles tracked vs. untracked files](#how-git-handles-tracked-vs-untracked-files)
 - [How to stop tracking previously tracked files?](#how-to-stop-tracking-previously-tracked-files)
    * [An epic question on StackOverflow](#an-epic-question-on-stackoverflow)
    * [Example](#example-1)
@@ -49,13 +51,13 @@ _in form of a Q&A_
 - [What are some other common ignore files in software development?](#what-are-some-other-common-ignore-files-in-software-development)
 - [Where to locate examples of ignore files?](#where-to-locate-examples-of-ignore-files)
 - [How can I use `.gitignore` as a conversation starter?](#how-can-i-use-gitignore-as-a-conversation-starter)
-- [Sources / further reading](#additional-resources-and-further-reading)
+- [Additional resources and further reading](#additional-resources-and-further-reading)
 
 <!-- TOC end -->
 
 # TL;DR
 
-Add a `.gitignore` file to your project's working directory to tell Git which files have to be ignored. Each line in the file should contain a _glob_ pattern matching files that you do not want to track in your Git repository.
+Create a text file named `.gitignore` in your project's working directory to tell Git which files to ignore. Each line in the file should contain a _glob_ pattern that matches the files you don't want to track in your Git repository.
 
 For instance, the line
 
@@ -75,7 +77,7 @@ Use [GitHub templates](https://github.com/github/gitignore), [GitLab](https://gi
 
 # What is `.gitignore`?
 
-`.gitignore` is a text file containing a list of all files that should be ignored by git, that is no change in those files should be recorded in the Git repository.
+`.gitignore` is a text file that contains a list of patterns matching the files Git should ignore, meaning no changes to those files will be recorded in the Git repository.
 
 From the [Git documentation](https://git-scm.com/docs/gitignore):
 > gitignore - Specifies intentionally untracked files to ignore
@@ -108,6 +110,7 @@ touch .gitignore
 ```
 
 Edit the file and add the comment:
+
 ```
 # Placeholder for .gitignore rules
 # Add patterns to ignore files and directories
@@ -193,6 +196,7 @@ Adding files containing sensitive information to `.gitignore` is not a good idea
 `.gitignore` does not provide foolproof protection against unintentional disclosure of confidential data (think of the case that a collaborator deletes the `.gitignore` file). To mitigate the risk of disclosing sensitive information it is crucial to implement additional security measures, such as proper access controls, encryption, and regular audits.
 
 Here are some recommended practices for handling sensitive data in a Git repository:
+
 - **Avoid Hardcoding Secrets:** refrain from hardcoding sensitive information directly into the source code. Use configuration files or environment variables instead. Save a template to your Git repository and the actual secrets locally or in a vault service.
 - **Security Audits:** use tools like [`git-secrets`](https://github.com/awslabs/git-secrets) or [gitleaks](https://github.com/gitleaks/gitleaks) to scan your code for passwords and other sensitive information before committing it to a Git repository.
 - **Encrypt Sensitive Files:** use [`git-crypt`](https://github.com/AGWA/git-crypt) to protect sensitive files by encrypting them when committed.
@@ -276,7 +280,7 @@ Here are the formatting rules for `.gitignore`:
 Let's say you have in your Git repository a file named `myFile1` and a directory `myDir` containig three files: `myFile1`, `myFile2`, `myFile3` :
 
 ```
- % tree
+% tree
 .
 ├── myDir
 │   ├── myFile1
@@ -330,10 +334,12 @@ The reason why the negation pattern has no effect on a file if its parent direct
 (from: [pattern format](https://git-scm.com/docs/gitignore/en#_pattern_format) in the official documentation).
 
 It's still possible to achieve the desired behavior—ignoring all files in the folder except `myFile.txt`—by using a workaround. You can modify your `.gitignore` like this:
+
 ```
 myDir/*         # Ignore all files in myDir
 !myDir/myFile.txt  # Exception: Track myFile.txt
 ```
+
 This pattern ensures that Git ignores everything in `myDir` but still checks for `myFile.txt` explicitly. With this approach, `myFile.txt` will be tracked while the rest of the folder remains ignored.
 
 
@@ -390,11 +396,75 @@ This command will scan all files and folders in your current directory and check
 Credit for the `find` command: [this answer on Stackoverflow](https://stackoverflow.com/a/467053) (“_Git command to show which specific files are ignored by .gitignore_”).
 
  
-# What happens to files that were being tracked before adding `.gitignore`?
+# What happens to tracked files after being added to `.gitignore`?
 
-Since `.gitignore` does not have a retroactive effect, you need to untrack the files that were tracked before the introduction of `.gitignore`.
+The `.gitignore` file is designed to prevent untracked files from being added to the repository and it does not affect files that are already tracked.
+
+This means that adding files that are already tracked to `.gitignore` can lead to confusion, as `.gitignore` does not retroactively affect files that are already being tracked. Git will continue to monitor those files, even if they match a pattern in `.gitignore`.
+
+## A quick reminder: tracked, untracked, and ignored files
+
+![Git files: tracked, untracked, ignored](GitTrackedUntracked.drawio.png)
+
+In Git files fall in one of the two categories:
+
+**1. Tracked files**
+These are files that Git is currently monitoring for changes. They have been added to Git's staging area at some point (using `git add`) and committed to the repository.
+
+**2. Untracked Files**
+Files that exist in the working directory but are not yet added to Git's tracking system. These files are not part of the repository, and Git does not monitor their changes. They can be added to the repository with `git add`, moving them into the "tracked" category.
+
+Ignored files are files that are also untracked but have been explicitly excluded from version control by adding them to `.gitignore` or other exclusion rules. Git ignores these files, meaning it neither tracks nor reports them as untracked in `git status`. They are treated as if they don't exist in the repository from Git’s perspective.
 
 
+## How Git handles tracked vs. untracked files
+
+Here's a breakdown of Git's behavior depending on whether the file is already tracked or untracked:
+
+**1. If the file is untracked:**
+
+- Expected behavior:
+
+ 	* Git will ignore the file, as specified in `.gitignore`.
+	* The file will not appear in the output of `git status`, and Git will not allow you to accidentally add it to the repository.
+
+- Example:
+
+```
+echo "temp.log" > .gitignore
+echo "temporary data" > temp.log
+git status
+# Output: "Nothing to commit, working tree clean" (temp.log is ignored)
+
+git add temp.log
+# Output: "The following paths are ignored by one of your .gitignore files"
+```	
+
+**2. If the file is already tracked:**
+
+- Behavior:
+
+ 	* Git will continue to track the file, regardless of its inclusion in `.gitignore`.
+   * Changes to the file will still be staged and committed, and the file will appear in `git status`.
+   
+- Example:
+
+```
+echo "temp.log" > .gitignore
+echo "important data" > temp.log
+git add temp.log
+git commit -m "Add temp.log"
+
+# Now add temp.log to .gitignore
+echo "temp.log" >> .gitignore
+
+# Modify the file
+echo "new data" >> temp.log
+git status
+# Output: "Changes not staged for commit: temp.log"
+```
+
+Due to this behavior, if you want to ignore a tracked file you first need to _untrack_ it.
 
 
 # How to stop tracking previously tracked files?
@@ -555,7 +625,7 @@ While `.gitignore` helps keep your Git repository organized by excluding unneces
 
 The [`git clean`](https://git-scm.com/docs/git-clean) command does exactly what its name suggests: it "cleans up" your working directory by removing files you don't care about—often referred to as "unmanaged" or "non-essential" files. These include files that are either untracked, ignored, or both, depending on the options you specify when running `git clean`. The command operates recursively from the current directory (which can be a subdirectory of subdirectory of your working directory), and respects the exclude rules specified in `.gitignore`.
 
-**Caution:** the `git clean` command should _always be used with caution_, as it can permanently delete untracked files or directories from your working directory! 
+⚠️ **Caution:** the `git clean` command should _always be used with caution_, as it can permanently delete untracked files or directories from your working directory! 
 
 Think of it as tidying up a cluttered desk: you sweep away scraps of paper and junk (untracked or ignored files) but must be careful not to toss out anything important (valuable files you want to keep). The option [`-n`](https://git-scm.com/docs/git-clean#Documentation/git-clean.txt--n) (or equivalently [`--dry-run`](https://git-scm.com/docs/git-clean#Documentation/git-clean.txt--n)) enables the safe use of `git clean` by displaying which files would be deleted without actually removing them.  This is like sorting through the pile first to ensure nothing crucial gets thrown away.
 
@@ -572,10 +642,10 @@ Assume your repository has this structure
 ```
 project
 ├── .gitignore
-|-- file1.tmp
-`-- src
+├── file1.tmp
+└── src
     ├── file2.tmp
-    `-- debug.log
+    └── debug.log
 ```
 and that the `.gitignore` file contains:
 ```
@@ -760,6 +830,7 @@ Based on the Gitmoji convention, the correct emoji for committing changes to a `
 No, Git's `.gitignore` files were not the first to introduce ignore functionality and glob patterns. These features already existed in other version control systems before Git. For example:
 
 - Mercurial, another popular distributed version control system, introduced the `.hgignore` file for specifying patterns to ignore files and directories. Mercurial's ignore file serves a similar purpose to Git's `.gitignore` and also uses glob patterns.
+
 - Subversion (SVN), a centralized version control system, has the `svn:ignore` property that allows users to specify patterns to ignore files and directories within the repository.
 
 Git's implementation of the `.gitignore` file has become widely known and adopted due to Git's popularity and widespread use in software development.
@@ -769,6 +840,7 @@ Git's implementation of the `.gitignore` file has become widely known and adopte
 Ignore files play a crucial role in managing a project's source code or other assets by keeping repositories clean and focused on relevant files.
 
 Here's a list of of common ignore files used in different contexts other than Git:
+
 - `.hgignore`: Used in Mercurial repositories for specifying patterns to ignore files and directories.
 - `.npmignore`: Used in Node.js projects to specify files and directories that should be ignored when publishing packages to the npm registry.
 - `.dockerignore`: Used in Docker projects to specify files and directories that should be excluded from the Docker build context when creating Docker images.
@@ -830,8 +902,8 @@ Choose an approach based on how formal or casual you want the interaction to be!
 - Pro Git book, by Scott Chacon and Ben Straub available [online](https://git-scm.com/book/en/v2). A thorough and accessible guide to Git, covering everything from the basics to advanced usage.
 - [Ignore files that have already been committed to a Git repository](https://stackoverflow.com/questions/1139762/ignore-files-that-have-already-been-committed-to-a-git-repository/1139797#1139797)
 - [How do I make Git forget about a file that was tracked, but is now in .gitignore?](https://stackoverflow.com/questions/1274057/how-do-i-make-git-forget-about-a-file-that-was-tracked-but-is-now-in-gitignore)
-- [.gitignore](https://www.atlassian.com/git/tutorials/saving-changes/gitignore) A clearly presented, well-structured, and easily comprehensible tutorial on `gitignore` by Atlassian.
-- [Git from the bottom up](http://ftp.newartisans.com/pub/git.from.bottom.up.pdf) A comprehensive guide that delves into the inner workings and architecture of Git, explaining how Git operates at a fundamental level and how its core principles influence its behavior.
+- 👉[.gitignore](https://www.atlassian.com/git/tutorials/saving-changes/gitignore) A clearly presented, well-structured, and easily comprehensible tutorial on `gitignore` by Atlassian.
+- 👉[Git from the bottom up](http://ftp.newartisans.com/pub/git.from.bottom.up.pdf) A comprehensive guide that delves into the inner workings and architecture of Git, explaining how Git operates at a fundamental level and how its core principles influence its behavior. Written in a fun, clear, and concise language, this book transforms the subject of Git into an engaging and entertaining exploration.
 - [Multiple .gitignore in subfolders](https://stackoverflow.com/questions/53208235/multiple-gitignore-in-subfolders)
 - [Don't ignore .gitignore](https://opensource.com/article/20/8/dont-ignore-gitignore)
 - [Learning All about GitIgnore : Ignoring Files and Folders](https://medium.com/@it.hhkn/learning-all-about-gitignore-ignoring-files-and-folders-d731998a7790)
