@@ -219,7 +219,7 @@ Adding executables to the `.gitignore` file is a common practice in software dev
 
 Does it make sense to take a very conservative approach with `.gitignore` by ignoring everything (*) by default and explicitly specifying the files and directories to include?
 
-I asked this question to ChatGPT since this is the approach I've chosen for the current repository. ChatGPT responded with a clear “yes, it absolutely makes sense” and then [elaborated](https://chatgpt.com/share/677aecf7-a990-8012-8c52-802fbc77f2c4) on the advantages and disadvantages of adopting such an approach.
+I asked this question to ChatGPT since this is the approach I've chosen for the current repository. ChatGPT responded with a clear “_yes, it absolutely makes sense_” and then [elaborated](https://chatgpt.com/share/677aecf7-a990-8012-8c52-802fbc77f2c4) on the advantages and disadvantages of adopting such an approach.
 
 In my opinion, explicitness is certainly the main advantage, as it makes clear which files are intended to be tracked in version control. are the risk of unintentionally omitting important files and the need for diligent maintenance of the `.gitignore` file to ensure nothing essential is overlooked. Overall, the approach appears to be well-suited for the current repository.
 
