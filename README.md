@@ -221,7 +221,7 @@ Does it make sense to take a very conservative approach with `.gitignore` by ign
 
 I asked this question to ChatGPT since this is the approach I've chosen for the current repository. ChatGPT responded with a clear “_yes, it absolutely makes sense_” and then [elaborated](https://chatgpt.com/share/677aecf7-a990-8012-8c52-802fbc77f2c4) on the advantages and disadvantages of adopting such an approach.
 
-In my opinion, explicitness is certainly the main advantage, as it makes clear which files are intended to be tracked in version control. are the risk of unintentionally omitting important files and the need for diligent maintenance of the `.gitignore` file to ensure nothing essential is overlooked. Overall, the approach appears to be well-suited for the current repository.
+In my opinion, explicitness is certainly the main advantage, as it makes clear which files are intended to be tracked in version control. The disadvantages are the risk of unintentionally omitting important files and the need for diligent maintenance of the `.gitignore` file to ensure nothing essential is overlooked. Overall, the approach appears to be well-suited for the current repository.
 
 As a side note, you might have noticed that I added a link to the conversation in question. Did you know that you can [share your ChatGPT conversations](https://chatgpt.com/share/6749af1c-0e14-8012-8830-ce0554744fc3)?
 
