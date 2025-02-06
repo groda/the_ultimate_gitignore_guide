@@ -272,7 +272,7 @@ Here are the formatting rules for `.gitignore`:
    `# this is a comment line`
    
 2. blank lines are ignored, and so they can be used as a separators for readability
-3. backslash (`\`) is the [_escape character_](https://tldp.org/LDP/Bash-Beginners-Guide/html/sect_03_03.html), so for instance `\#` at the beginning of a patterns means that the pattern begins with a hash (`\#` undoes the special meaning of the hash character)
+3. backslash (`\`) is the [_escape character_](https://tldp.org/LDP/Bash-Beginners-Guide/html/sect_03_03.html), so for instance `\#` at the beginning of a pattern means that the pattern begins with a hash (`\#` undoes the special meaning of the hash character)
 4. trailing spaces are ignored unless they are quoted with backslash (`\`)
 5. a prefix `!` negates the pattern thus including files that were excluded by a previous pattern. Of course `!` can be escaped with a backslash (`\!`) for matching files that begin with an exclamation point.
 6. the slash (`/`) is the directory separator and it has a different meaning depending on its position in the gitignore search pattern:
