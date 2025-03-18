@@ -103,7 +103,7 @@ This question was raised [on Reddit](https://www.reddit.com/r/git/comments/o1lyk
 
 The `.gitignore` file is simply a convenience that helps manage which files you wish Git to ignore.
 
-That said, including a `.gitignore` file in your repository is a best practice that can elevate the professionalism of your project. You can even initialize it with a placeholder comment, and update it later as needed. 
+That said, including a `.gitignore` file in your repository is a best practice that can elevate the professionalism of your project. As a `.gitignore` beginner, if you’re unsure what to include, just follow the classic wisdom of 'fake it till you make it.' Simply initialize the file with a placeholder comment, and update it later as needed.
 
 Create the file in the root of your repository:
 ```
