@@ -225,6 +225,10 @@ In my opinion, explicitness is certainly the main advantage, as it makes clear w
 
 As a side note, you might have noticed that I added a link to the conversation in question. Did you know that you can [share your ChatGPT conversations](https://chatgpt.com/share/6749af1c-0e14-8012-8830-ce0554744fc3)?
 
+**EDIT 2025-10-15:** This section could be titled _should I trust AI?_ And the answer is ... be careful. 
+
+I asked chatGPT the same question but with a slightly different twist and the answer I got this time was that my ignore-all `.gitignore` setup was [a bad idea](https://chatgpt.com/share/68eff186-ca2c-8012-8c17-d82fdb4585a1) (which I agree with). This is a reminder that AI suffers from _confirmation bias_ or "_the tendency to align with user beliefs, often amplified by algorithms that feed users information confirming their existing views, creating an "echo chamber" effect._” (quote from Gemini, btw does it make sense to cite AI-generated text?). I've experienced this multiple times now and in the beginning it was disheartening, especially because one wouldn't expect any biases in technical topics. So all I can say is just be aware of this effect and don't get carried away by large language models.
+
 
 # Where can I find `.gitignore` templates?
 
