@@ -85,7 +85,7 @@ From the [Git documentation](https://git-scm.com/docs/gitignore):
 
 ## Note that `.gitignore` starts with a `.`
 
-Note that the `.gitignore` file starts with a dot (`.`). This means you might not be able to see it by default depending on your operating system. For instance, on Linux/Unix/Mac, if you type `ls` you won't see files starting with `.`. In order to see those files too you need to use the option `-a` like this:
+Note that the `.gitignore` file starts with a dot (`.`). This means you might not be able to see it by default depending on your operating system. For instance, on Linux/Unix/Mac, if you type `ls` in a terminal you won't see files starting with `.`. In order to see those files too you need to use the option `-a` like this:
 
     ls -a
 
@@ -346,7 +346,7 @@ The reason why the negation pattern has no effect on a file if its parent direct
 
 > _Git doesn’t list excluded directories for performance reasons, so any patterns on contained files have no effect, no matter where they are defined._
 
-(from: [pattern format](https://git-scm.com/docs/gitignore/en#_pattern_format) in the official documentation).
+(from: [pattern format](https://git-scm.com/docs/gitignore#_pattern_format) in the official documentation).
 
 It's still possible to achieve the desired behavior—ignoring all files in the folder except `myFile.txt`—by using a workaround. You can modify your `.gitignore` like this:
 
@@ -642,7 +642,7 @@ The [`git clean`](https://git-scm.com/docs/git-clean) command does exactly what 
 
 ⚠️ **Caution:** the `git clean` command should _always be used with caution_, as it can permanently delete untracked files or directories from your working directory! 
 
-Think of it as tidying up a cluttered desk: you sweep away scraps of paper and junk (untracked or ignored files) but must be careful not to toss out anything important (valuable files you want to keep). The option [`-n`](https://git-scm.com/docs/git-clean#Documentation/git-clean.txt--n) (or equivalently [`--dry-run`](https://git-scm.com/docs/git-clean#Documentation/git-clean.txt--n)) enables the safe use of `git clean` by displaying which files would be deleted without actually removing them.  This is like sorting through the pile first to ensure nothing crucial gets thrown away.
+Think of it as tidying up a cluttered desk: you sweep away scraps of paper and junk (untracked or ignored files) but must be careful not to toss out anything important (valuable files you want to keep). The option [`-n`](https://git-scm.com/docs/git-clean#Documentation/git-clean.txt--n) (or equivalently [`--dry-run`](https://git-scm.com/docs/git-clean#Documentation/git-clean.txt---dry-run)) enables the safe use of `git clean` by displaying which files would be deleted without actually removing them.  This is like sorting through the pile first to ensure nothing crucial gets thrown away.
 
 Next, let's look at an example of using the `-e <pattern>` option (equivalent to `--exclude=<pattern>`) with `git clean`. The `-e` option allows you to specify patterns to exclude certain files from being cleaned, in addition to those already ignored by the `.gitignore` rules.
 
