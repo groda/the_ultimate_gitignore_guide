@@ -4,7 +4,11 @@
 
 _in form of a Q&A_
 
+[![Link Check](https://github.com/groda/the_ultimate_gitignore_guide/actions/workflows/link-check.yml/badge.svg)](https://github.com/groda/the_ultimate_gitignore_guide/actions/workflows/link-check.yml)
+
+
 <!-- TOC start -->
+
 
 - [TL;DR](#tldr)
 - [What is `.gitignore`?](#what-is-gitignore)
