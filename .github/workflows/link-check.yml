@@ -1,0 +1,16 @@
+# This workflow checks all repository links once a week and creates an issue in case of errors. 
+name: Links CI
+
+on:
+  schedule:
+    - cron: "00 22 * * 1"
+  workflow_dispatch:
+
+permissions:
+  issues: write
+  
+jobs:
+  linkChecker:
+    uses: groda/gha-workflows/.github/workflows/link-check.yml@main
+    with:
+      issue-labels: "report, automated issue"
