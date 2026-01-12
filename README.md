@@ -158,10 +158,10 @@ Of course, if you have a logfile in your repository to showcase something about 
 
 ### Is “glob” an English word?
 
-The name “glob” is the abbreviation of “global” and it originates from the 1971 Bell Labs' Unix version. Here is the description of `/etc/glob` from the Unix Programmer's Manual (K. Thompson and D. M. Ritchie, November 3, 1971 [available online](https://www.bell-labs.com/usr/dmr/www/1stEdman.html)):
+The name “glob” is the abbreviation of “global” and it originates from the 1971 Bell Labs' Unix version. Here is the description of `/etc/glob` from the Unix Programmer's Manual (K. Thompson and D. M. Ritchie, November 3, 1971 [available online](https://www.nokia.com/bell-labs/about/dennis-m-ritchie/1stEdman.html)):
 > `glob` is used to expand arguments to the shell containing `*` or `?`. It is passed the argument list containing the metacharacters; glob expands the list and calls the command itself
 
-Traveling back to the 70s, here's a how the original page looked like ([source](https://www.bell-labs.com/usr/dmr/www/man71.pdf)):
+Traveling back to the 70s, here's a how the original page looked like ([source](https://www.nokia.com/bell-labs/about/dennis-m-ritchie/man71.pdf)):
 
 ![glob](glob.png)
 
