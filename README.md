@@ -42,6 +42,7 @@ _in form of a Q&A_
    * [Which Git commands support passing `.gitignore` patterns via the command line?](#which-git-commands-support-passing-gitignore-patterns-via-the-command-line)
       + [Preventing specific files from being removed by `git clean`](#preventing-specific-files-from-being-removed-by-git-clean)
       + [Using `git ls-files` with exclude patterns](#using-git-ls-files-with-exclude-patterns)
+- [Can a file escape the `.gitignore` oubliette?](#can-a-file-escape-the-gitignore-oubliette)
 - [What's the difference between `.gitignore` and `~/.gitignore_global`?](#whats-the-difference-between-gitignore-and-gitignore_global)
 - [What's the difference between `.gitignore` and `.git/info/exclude`?](#whats-the-difference-between-gitignore-and-gitinfoexclude)
 - [What's the order of precedence for all these ignore files?](#whats-the-order-of-precedence-for-all-these-ignore-files)
@@ -713,6 +714,22 @@ $ git ls-files --others --exclude="*.log"
 file1.tmp
 src/file2.tmp
 ```
+
+# Can a file escape the `.gitignore` oubliette?
+
+In medieval castles, an oubliette (from the French _oublier_ — “to forget”) was a hidden dungeon accessible only from a hatch above. Once something fell in, it was essentially forgotten.
+
+By default, Git treats files listed in `.gitignore` the same way. They lie in the “oubliette”: forgotten, deliberately excluded, present in the filesystem but invisible to the repository’s official narrative.
+
+However, there's a way to rescue a file from the `.gitignore` oubliette and force it into history:
+```
+git add -f secret.txt
+```
+
+The `-f` (or `--force`) option tells Git:
+> “I know this file is meant to be ignored. I choose to drag it out of the oubliette and put it into history anyway.”
+
+⚠️ Beware: This rescue is temporary. In future `git add` commands, Git will treat the file as a prisoner once more, unless `-f` is invoked again. To free it permanently, you must remove it from `.gitignore`.
 
 # What's the difference between `.gitignore` and `~/.gitignore_global`?
 
