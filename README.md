@@ -5,7 +5,7 @@
 _in form of a Q&A_
 
 [![Link Check](https://github.com/groda/the_ultimate_gitignore_guide/actions/workflows/link-check.yml/badge.svg)](https://github.com/groda/the_ultimate_gitignore_guide/actions/workflows/link-check.yml)
-[![Last Commit](https://img.shields.io/github/last-commit/groda/the_ultimate_gitignore_guide)](https://github.com/groda/color-combinations/commits/main)
+[![Last Commit](https://img.shields.io/github/last-commit/groda/the_ultimate_gitignore_guide)](https://github.com/groda/the_ultimate_gitignore_guide/commits/main)
 
 
 <!-- TOC start -->
